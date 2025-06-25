@@ -6,8 +6,6 @@ import Footer from "./Footer";
 import ServiceSection from "./NewSection";
 import MovingCards from "./MovinfCrad";
 
-// eslint-disable-next-line @next/next/no-img-element
-
 export default function HomePage() {
   
   return (
@@ -17,7 +15,7 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative w-full overflow-x-hidden min-h-screen bg-gradient-to-r from-black to-blue-950"
+        className="relative w-full overflow-x-hidden h-screen bg-gradient-to-r from-black to-blue-950"
       >
         {/* Background Car Image */}
         <motion.img
@@ -35,7 +33,7 @@ export default function HomePage() {
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col items-center justify-center min-h-[60vh] text-center text-white px-2 sm:px-4 relative"
+          className="flex flex-col items-center justify-center h-full text-center text-white px-4 relative"
         >
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -65,7 +63,7 @@ export default function HomePage() {
             Your one-stop destination for premium car parts and services.
           </motion.p>
 
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-2 sm:bottom-4 w-full max-w-xs sm:max-w-md md:max-w-lg">
+          <div className="absolute bottom-0">
             <MovingCards />
           </div>
         </motion.div>
@@ -77,7 +75,7 @@ export default function HomePage() {
         whileInView="visible"
         viewport={{ once: true }}
         transition={{ staggerChildren: 0.2 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-2 sm:px-4 md:px-12 mt-12"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-12 mt-12"
       >
         {[
           {
@@ -146,7 +144,7 @@ export default function HomePage() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="mt-16 px-2 sm:px-4 md:px-12 mb-20"
+        className="mt-16 px-4 md:px-12 mb-20"
       >
         <div className="bg-blue-950 bg-opacity-20 p-8 rounded-xl shadow-lg border border-blue-600">
           <h2 className="text-3xl font-bold text-blue-300 mb-4">

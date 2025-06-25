@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -183,13 +182,13 @@ export default function ContactUs() {
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left Side - Image */}
             <div className="hidden md:flex items-center justify-center">
-              <Image
+              <img
                 src="https://th.bing.com/th/id/OIP.ABZDYb1aT89tuZw5boXZcQHaG0?rs=1&pid=ImgDetMain"
                 alt="Contact Illustration"
-                width={400}
-                height={300}
+                width="400"
+                height="300"
                 className="w-full h-auto rounded-lg shadow-lg border border-blue-500 hover:scale-105 transition duration-300"
-                priority={true}
+                loading="lazy"
               />
             </div>
 
