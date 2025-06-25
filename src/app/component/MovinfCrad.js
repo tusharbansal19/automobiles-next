@@ -35,7 +35,7 @@ export default function MovingCards() {
     animationFrame = requestAnimationFrame(updatePosition);
 
     return () => cancelAnimationFrame(animationFrame);
-  }, [isPaused]);
+  }, [isPaused, cards.length]);
 
   return (
     <div

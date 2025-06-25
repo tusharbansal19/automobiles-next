@@ -22,7 +22,7 @@ export default function NotFoundPage() {
         transition={{ delay: 0.2, duration: 0.5 }}
         className="mt-4 text-xl text-gray-400"
       >
-        Oops! The page you're looking for doesn't exist.
+        Oops! The page you&apos;re looking for doesn&apos;t exist.
       </motion.p>
       <motion.button
         whileHover={{ scale: 1.1 }}
