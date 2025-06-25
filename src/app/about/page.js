@@ -9,6 +9,7 @@ import {
   Calendar,
   Star,
 } from "lucide-react";
+import Image from "next/image";
 // import Footer from "./Footer";
 
 const MemberCard = ({ name, role, relationship, description, image, Component = "div" }) => {
@@ -21,9 +22,11 @@ const MemberCard = ({ name, role, relationship, description, image, Component = 
         <div className="w-full md:w-1/3 flex items-center justify-center p-6 md:p-0">
           {image && (
             <div className="flex items-center justify-center w-40 h-40 md:w-48 md:h-48 bg-blue-950 rounded-full border-4 border-blue-400 shadow-lg overflow-hidden">
-              <img
+              <Image
                 src={image}
                 alt={name}
+                width={192}
+                height={192}
                 className="w-full h-full object-contain bg-blue-950"
                 style={{ aspectRatio: '1/1', objectFit: 'contain', background: '#0f172a' }}
               />
@@ -126,10 +129,13 @@ export default function AboutUs() {
       </div>
       {/* Top Section with Shop Image */}
       <div className="relative w-full max-w-4xl h-56 md:h-96 overflow-hidden rounded-2xl shadow-2xl mb-12">
-        <img
+        <Image
           src="/Image/shopImg.jpg"
           alt="Our Shop"
+          width={1200}
+          height={400}
           className="w-full h-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
+          priority={true}
         />
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-blue-400 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100 pointer-events-none"></div>
       </div>

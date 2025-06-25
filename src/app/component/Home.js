@@ -5,6 +5,7 @@ import { FaCar, FaShoppingCart, FaTag, FaTools } from "react-icons/fa";
 import Footer from "./Footer";
 import ServiceSection from "./NewSection";
 import MovingCards from "./MovinfCrad";
+import Image from "next/image";
 
 export default function HomePage() {
   
@@ -123,11 +124,16 @@ export default function HomePage() {
                 {card.title}
               </h2>
             </div>
-            <img
-              src={`${card.img}`}
-              alt={card.title}
-              className="w-full h-40 max-w-[200px] object-cover rounded-lg mb-4 transition-transform duration-500 hover:scale-110"
-            />
+            {card.img && (
+              <Image
+                src={card.img}
+                alt={card.title}
+                width={200}
+                height={160}
+                className="w-full h-40 max-w-[200px] object-cover rounded-lg mb-4 transition-transform duration-500 hover:scale-110"
+                priority={index === 0}
+              />
+            )}
             <p className="text-blue-100">{card.desc}</p>
           </motion.div>
         ))}

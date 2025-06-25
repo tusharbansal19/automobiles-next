@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 export default function MovingCards() {
   const cards = [
@@ -56,10 +57,13 @@ export default function MovingCards() {
             key={index}
             className="w-[16rem] h-[10rem] sm:w-[10rem] sm:h-[6rem] md:w-[14rem] md:h-[8rem] flex-shrink-0 bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300"
           >
-            <img
+            <Image
               src={card}
               alt={`Car ${index + 1}`}
+              width={288}
+              height={192}
               className="w-full h-full object-cover"
+              priority={index === 0}
             />
           </div>
         ))}

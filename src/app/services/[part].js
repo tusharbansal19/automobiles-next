@@ -1,5 +1,6 @@
 "use client";
 import { useParams, useRouter } from 'next/navigation';
+import Image from "next/image";
 
 export default function PartDetail() {
   const { part } = useParams();
@@ -17,11 +18,16 @@ export default function PartDetail() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-blue-950 to-blue-900 py-12 px-4">
       <div className="max-w-xl w-full bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 rounded-2xl shadow-2xl border border-blue-500 p-8 flex flex-col items-center">
-        <img
-          src={selected.image}
-          alt={selected.name}
-          className="w-64 h-64 object-contain rounded-xl border-4 border-blue-400 shadow-lg mb-6 bg-blue-950"
-        />
+        <div className="w-full md:w-1/3">
+          <Image
+            src={selected.image}
+            alt={selected.name}
+            width={300}
+            height={200}
+            className="w-full h-full object-cover rounded-lg"
+            priority={true}
+          />
+        </div>
         <h1 className="text-4xl font-bold text-blue-200 mb-2 text-center">{selected.name}</h1>
         <p className="text-blue-100 text-lg mb-4 text-center">{selected.description}</p>
         <div className="flex flex-wrap gap-2 mb-4 justify-center">
