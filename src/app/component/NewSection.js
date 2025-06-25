@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 export default function ServiceSection() {
   const fadeInLeft = {
@@ -26,13 +25,10 @@ export default function ServiceSection() {
           viewport={{ once: true }}
           className="relative w-full md:w-[50%]  hidden  sm:flex h-64 overflow-hidden rounded-lg"
         >
-          <Image
+          <img
             src="https://websta.me/wp-content/uploads/2023/09/Aftermarket-Parts-Shop.webp"
             alt="Service"
-            width={400}
-            height={256}
             className="w-full h-full object-cover rounded-lg border  border-blue-500 transition-transform duration-500 hover:scale-105 hover:border-blue-400"
-            priority={true}
           />
           <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-blue-400 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100 pointer-events-none"></div>
         </motion.div>
@@ -108,13 +104,10 @@ export default function ServiceSection() {
           viewport={{ once: true }}
           className="relative w-full md:w-[50%] hidden  sm:flex h-64 overflow-hidden rounded-lg"
         >
-          <Image
+          <img
             src="/Image/cardi1.jpg"
             alt="Service"
-            width={400}
-            height={256}
             className="w-full h-full object-cover rounded-lg border border-blue-500 transition-transform duration-500 hover:scale-105 hover:border-blue-400"
-            priority={false}
           />
           <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-blue-400 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100 pointer-events-none"></div>
         </motion.div>
@@ -130,13 +123,10 @@ export default function ServiceSection() {
           viewport={{ once: true }}
           className="relative w-full md:w-[50%] hidden  sm:flex h-64 overflow-hidden rounded-lg"
         >
-          <Image
+          <img
             src="/Image/cardi2.jpg"
             alt="Service"
-            width={400}
-            height={256}
             className="w-full h-full object-cover rounded-lg border border-blue-500 transition-transform duration-500 hover:scale-105 hover:border-blue-400"
-            priority={false}
           />
           <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-blue-400 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100 pointer-events-none"></div>
         </motion.div>
