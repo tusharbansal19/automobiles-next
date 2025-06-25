@@ -37,13 +37,13 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-blue-300">Contact Us</h3>
             <ul className="space-y-2">
               <li className="flex items-center">
-                <FaMapMarkerAlt className="mr-2 text-blue-400" /> 123 Street, New Delhi, India
+                <FaMapMarkerAlt className="mr-2 text-blue-400" /> Bulandshahr Stand, Siyana, BSR, UP, INDIA
               </li>
               <li className="flex items-center">
-                <FaPhone className="mr-2 text-blue-400" /> +91 12345 67890
+                <FaPhone className="mr-2 text-blue-400" /> +91 9719167530
               </li>
               <li className="flex items-center">
-                <FaEnvelope className="mr-2 text-blue-400" /> support@tusharauto.com
+                <FaEnvelope className="mr-2 text-blue-400" /> tusharbansal3366@gmail.com
               </li>
             </ul>
           </div>

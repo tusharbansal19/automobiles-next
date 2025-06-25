@@ -4,6 +4,7 @@ import { lazy, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const parts = [
   { 
@@ -35,6 +36,7 @@ const parts = [
 
 export default function PartsSection() {
   const [likedParts, setLikedParts] = useState({});
+  const router = useRouter();
 
   const toggleLike = (name) => {
     setLikedParts((prev) => ({
@@ -71,6 +73,9 @@ export default function PartsSection() {
               }}
               viewport={{ once: true }} // ✅ Triggers only once
               className="flex flex-col md:flex-row items-center gap-6 bg-gradient-to-r from-[#002b5c] to-[#001f3f] rounded-2xl overflow-hidden shadow-lg border-l-4 border-r-4 border-blue-500 hover:scale-105 transition-transform duration-500 hover:shadow-[0px_0px_30px_#1e90ff] max-h-[300px]"
+              onClick={() => {
+                router.push(`/services/${encodeURIComponent(part.name)}`);
+              }}
             >
               {/* Left Side - Image */}
               <div className="w-full md:w-1/3">
@@ -93,7 +98,10 @@ export default function PartsSection() {
                     {part.name}
                   </h3>
                   {/* Like Button */}
-                  <button onClick={() => toggleLike(part.name)}>
+                  <button onClick={(e) => {
+                    e.stopPropagation();
+                    toggleLike(part.name);
+                  }}>
                     <Heart
                       className={`w-6 h-6 transition ${
                         likedParts[part.name]

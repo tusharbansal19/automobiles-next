@@ -4,22 +4,17 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronDown, X, Search } from "lucide-react";
 import PartsSection from "../component/productSection";
-
-const parts = [
-  { name: "Bumper", image: "/images/bumper.jpg", description: "High-quality car bumper for protection and style." },
-  { name: "Headlight", image: "/images/headlight.jpg", description: "Bright and efficient headlights for night driving." },
-  { name: "Backlight", image: "/images/backlight.jpg", description: "Durable backlights for enhanced visibility." },
-  { name: "Mirror", image: "/images/mirror.jpg", description: "Adjustable side mirrors with anti-glare coating." },
-  { name: "Clutch Plate", image: "/images/clutch_plate.jpg", description: "Smooth clutch engagement for better performance." },
-  { name: "Bearing", image: "/images/bearing.jpg", description: "High-performance bearings for smoother rides." },
-  { name: "Mobile Oil", image: "/images/mobile_oil.jpg", description: "Premium quality mobile oils for engine longevity." },
-  { name: "Engine Oil", image: "/images/engine_oil.jpg", description: "Top-grade engine oil for maximum performance." },
-];
+import { useRouter } from 'next/navigation';
 
 export default function Services() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPart, setSelectedPart] = useState(null);
-
+  const router = useRouter();
+  const parts = [
+    { name: "Bumper", image: "/Image/bumper.jpg", description: "High-quality car bumper for protection and style.", tags: ["Protection", "Style", "Durable"] },
+    { name: "Headlight", image: "/Image/headlight.jpg", description: "Bright and efficient headlights for night driving.", tags: ["Night Vision", "Efficiency", "Safety"] },
+    { name: "Mobile Oil", image: "/Image/mobile_oil.jpg", description: "Premium quality mobile oils for engine longevity.", tags: ["Premium", "Performance", "Engine Care"] },
+    { name: "Engine Oil", image: "/Image/engine_oil.jpg", description: "Top-grade engine oil for maximum protection.", tags: ["Performance", "Protection", "Engine Care"] },
+  ];
   const filteredParts = parts.filter((part) =>
     part.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -80,21 +75,12 @@ export default function Services() {
           {/* Card Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {filteredParts.map((part, index) => (
-              <motion.div
+              <div
                 key={part.name}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{
-                  delay: index * 0.1,
-                  duration: 0.5,
-                  ease: "easeOut",
+                onClick={() => {
+                  router.push(`/services/${encodeURIComponent(part.name)}`);
                 }}
-                viewport={{ once: true }} // ✅ Animation happens only once
-                className={`group relative bg-gradient-to-r from-[#002b5c] to-[#001f3f] rounded-2xl shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:rotate-[360deg] duration-[800ms] border-l-4 border-r-4 border-blue-500 ${
-                  selectedPart && selectedPart !== part.name
-                    ? "pointer-events-none opacity-50"
-                    : ""
-                }`}
+                className={`cursor-pointer group relative bg-gradient-to-r from-[#002b5c] to-[#001f3f] rounded-2xl shadow-lg overflow-hidden transform transition-transform hover:scale-105 hover:rotate-[360deg] duration-[800ms] border-l-4 border-r-4 border-blue-500`}
               >
                 {/* Image */}
                 <Image
@@ -116,23 +102,11 @@ export default function Services() {
                   {/* More Info Button */}
                   <button
                     className="mt-2 text-blue-400 hover:text-blue-500 flex items-center"
-                    onClick={() =>
-                      setSelectedPart(selectedPart === part.name ? null : part.name)
-                    }
                   >
                     More Info <ChevronDown className="w-4 h-4 ml-1" />
                   </button>
-
-                  {/* Dropdown Content */}
-                  {selectedPart === part.name && (
-                    <div className="mt-2 bg-[#001f3f] p-3 border border-gray-700 rounded-lg">
-                      <p className="text-gray-300">
-                        Detailed information about {part.name} goes here...
-                      </p>
-                    </div>
-                  )}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
