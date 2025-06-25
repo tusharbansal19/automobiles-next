@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 
+// eslint-disable-next-line @next/next/no-img-element
+
 export default function ServiceSection() {
   const fadeInLeft = {
     hidden: { x: -100, opacity: 0 },

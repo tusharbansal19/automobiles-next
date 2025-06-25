@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { FaCar, FaGasPump, FaRupeeSign, FaCogs, FaStar, FaBars, FaTimes, FaFilter, FaHeart, FaShare, FaEye, FaTachometerAlt, FaCalendarAlt } from "react-icons/fa";
 
+// eslint-disable-next-line @next/next/no-img-element
 const DUMMY_CARS = [
   {
     id: 1,
@@ -293,7 +294,7 @@ export default function CarPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div className="min-h-screen  bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
       <div className="flex">
         {/* Sidebar: always visible on desktop, toggled on mobile */}
         <aside
@@ -325,7 +326,7 @@ export default function CarPage() {
           {/* Header with Filter Button */}
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 gap-4">
             <div>
-              <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">Premium Cars</h1>
+              <h1 className="text-3xl mt-20 lg:text-4xl font-bold text-white mb-2">Premium Cars</h1>
               <p className="text-gray-300">Find your perfect ride from our curated collection</p>
             </div>
             
@@ -353,98 +354,100 @@ export default function CarPage() {
           </div>
 
           {/* Car Cards Grid */}
-          <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredCars.length === 0 ? (
-              <div className="col-span-full text-center py-16">
-                <FaCar className="mx-auto text-6xl text-gray-600 mb-4" />
-                <h3 className="text-2xl font-semibold text-gray-400 mb-2">No cars found</h3>
-                <p className="text-gray-500">Try adjusting your filters to see more results</p>
-              </div>
-            ) : (
-              filteredCars.map((car) => (
-                <div
-                  key={car.id}
-                  className="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-700 hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2"
-                >
-                  {/* Image Container */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={car.image}
-                      alt={car.name}
-                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    
-                    {/* Year Badge */}
-                    <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
-                      {car.year}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button
-                        onClick={() => toggleFavorite(car.id)}
-                        className={`p-2 rounded-full backdrop-blur-md transition-all duration-300 ${
-                          favorites.has(car.id) 
-                            ? 'bg-red-500 text-white' 
-                            : 'bg-white/10 text-white hover:bg-red-500'
-                        }`}
-                      >
-                        <FaHeart size={14} />
-                      </button>
-                      <button className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-blue-500 transition-all duration-300">
-                        <FaShare size={14} />
-                      </button>
-                    </div>
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6 space-y-4">
-                    {/* Title and Rating */}
-                    <div className="flex items-start justify-between">
-                      <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 leading-tight">
-                        {car.name}
-                      </h3>
-                      <div className="flex items-center gap-1 bg-yellow-500/20 px-2 py-1 rounded-full">
-                        <FaStar className="text-yellow-400 text-xs" />
-                        <span className="text-yellow-400 text-sm font-semibold">{car.rating}</span>
-                      </div>
-                    </div>
-
-                    {/* Location */}
-                    <p className="text-gray-400 text-sm">{car.location}</p>
-
-                    {/* Stats Grid */}
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="flex items-center gap-2 text-gray-300">
-                        <FaTachometerAlt className="text-blue-400" />
-                        <span className="text-sm">{car.kms}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-300">
-                        <FaGasPump className="text-orange-400" />
-                        <span className="text-sm">{car.fuel}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-300">
-                        <FaCogs className="text-blue-400" />
-                        <span className="text-sm">{car.transmission}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-300">
-                        <FaEye className="text-green-400" />
-                        <span className="text-sm">{car.views} views</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Animated Border Effect */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 via-blue-500/20 to-pink-500/20 animate-pulse" />
-                  </div>
+          <div className="w-full max-h-[70vh] overflow-y-auto scrollbar-hide">
+            <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredCars.length === 0 ? (
+                <div className="col-span-full text-center py-16">
+                  <FaCar className="mx-auto text-6xl text-gray-600 mb-4" />
+                  <h3 className="text-2xl font-semibold text-gray-400 mb-2">No cars found</h3>
+                  <p className="text-gray-500">Try adjusting your filters to see more results</p>
                 </div>
-              ))
-            )}
-          </main>
+              ) : (
+                filteredCars.map((car) => (
+                  <div
+                    key={car.id}
+                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-700 hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2"
+                  >
+                    {/* Image Container */}
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={car.image}
+                        alt={car.name}
+                        className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      
+                      {/* Year Badge */}
+                      <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                        {car.year}
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button
+                          onClick={() => toggleFavorite(car.id)}
+                          className={`p-2 rounded-full backdrop-blur-md transition-all duration-300 ${
+                            favorites.has(car.id) 
+                              ? 'bg-red-500 text-white' 
+                              : 'bg-white/10 text-white hover:bg-red-500'
+                          }`}
+                        >
+                          <FaHeart size={14} />
+                        </button>
+                        <button className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-blue-500 transition-all duration-300">
+                          <FaShare size={14} />
+                        </button>
+                      </div>
+
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 space-y-4">
+                      {/* Title and Rating */}
+                      <div className="flex items-start justify-between">
+                        <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 leading-tight">
+                          {car.name}
+                        </h3>
+                        <div className="flex items-center gap-1 bg-yellow-500/20 px-2 py-1 rounded-full">
+                          <FaStar className="text-yellow-400 text-xs" />
+                          <span className="text-yellow-400 text-sm font-semibold">{car.rating}</span>
+                        </div>
+                      </div>
+
+                      {/* Location */}
+                      <p className="text-gray-400 text-sm">{car.location}</p>
+
+                      {/* Stats Grid */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="flex items-center gap-2 text-gray-300">
+                          <FaTachometerAlt className="text-blue-400" />
+                          <span className="text-sm">{car.kms}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-300">
+                          <FaGasPump className="text-orange-400" />
+                          <span className="text-sm">{car.fuel}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-300">
+                          <FaCogs className="text-blue-400" />
+                          <span className="text-sm">{car.transmission}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-300">
+                          <FaEye className="text-green-400" />
+                          <span className="text-sm">{car.views} views</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Animated Border Effect */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 via-blue-500/20 to-pink-500/20 animate-pulse" />
+                    </div>
+                  </div>
+                ))
+              )}
+            </main>
+          </div>
         </div>
       </div>
     </div>

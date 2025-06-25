@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 
+// eslint-disable-next-line @next/next/no-img-element
 export default function MovingCards() {
   const cards = [
     "/Image/cardi1.jpg",
