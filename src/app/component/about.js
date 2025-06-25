@@ -9,6 +9,7 @@ import {
   Star,
 } from "lucide-react";
 import Footer from "./Footer";
+import Image from "next/image";
 
 const MemberCard = ({ name, role, relationship, description, image, Component = "div" }) => {
   const [open, setOpen] = useState(false);
@@ -18,11 +19,19 @@ const MemberCard = ({ name, role, relationship, description, image, Component = 
       <div className="flex flex-col md:flex-row items-stretch">
         {/* Member Image (Left Side) */}
         <div className="w-full md:w-1/3">
-          <img
-            src={image}
-            alt={name}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-          />
+          {image && (
+            <div className="flex items-center justify-center w-40 h-40 md:w-48 md:h-48 bg-blue-950 rounded-full border-4 border-blue-400 shadow-lg overflow-hidden">
+              <Image
+                src={image}
+                alt={name}
+                width={192}
+                height={192}
+                className="w-full h-full object-contain bg-blue-950"
+                style={{ aspectRatio: '1/1', objectFit: 'contain', background: '#0f172a' }}
+                priority={true}
+              />
+            </div>
+          )}
         </div>
 
         {/* Member Info (Right Side) */}
@@ -117,10 +126,13 @@ export default function AboutUs() {
     <div className="bg-gradient-to-r from-black to-blue-950 min-h-screen text-white  md:flex gap-x-4">
       {/* Top Section with Shop Image */}
       <div className="relative w-full h-80 overflow-hidden rounded-lg">
-        <img
-          src="/Image/shop.jpg"
+        <Image
+          src="/Image/shopImg.jpg"
           alt="Our Shop"
+          width={1200}
+          height={400}
           className="w-full h-full object-cover rounded-lg transition-transform duration-500 hover:scale-105"
+          priority={true}
         />
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-blue-400 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100 pointer-events-none"></div>
       </div>
