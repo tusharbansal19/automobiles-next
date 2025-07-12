@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const user = {
+  id: 1,
   name: "Tushar Bansal",
   email: "tushar@example.com",
   avatar: "https://randomuser.me/api/portraits/men/32.jpg",
