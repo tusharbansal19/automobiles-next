@@ -114,7 +114,7 @@ export default function HomePage() {
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.6, delay: index * 0.15 }}
-            className={`bg-white bg-opacity-10 border border-blue-500 rounded-xl p-6 shadow-lg transition-transform duration-500 hover:scale-105 hover:shadow-blue-500/50 hover:-translate-y-2 
+            className={` bg-opacity-10 border border-blue-500 rounded-xl p-6 shadow-lg transition-transform duration-500 hover:scale-105 hover:shadow-blue-500/50 hover:-translate-y-2 
               ${card.id === 4 ? "hidden md:block lg:hidden" : ""}`}
           >
             <div className="flex items-center mb-4">
