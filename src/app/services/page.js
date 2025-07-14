@@ -430,7 +430,7 @@ export default function Services() {
           {/* Mobile Filter Button */}
           <button
             onClick={() => setSidebarOpen(true)}
-            className="lg:hidden fixed left-4 bottom-6 z-50 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+            className="lg:hidden fixed left-4 bottom-16 z-50 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
           >
             <FaFilter className="text-sm" />
             <span className="font-semibold">Filters</span>

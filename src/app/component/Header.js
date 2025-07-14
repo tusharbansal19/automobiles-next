@@ -165,7 +165,7 @@ export default function Header() {
             </button>
             {/* Dropdown */}
             {profileOpen && (
-              <div className="absolute top-12 right-0 w-48 bg-white rounded-xl shadow-xl border border-blue-100 z-50 p-4 animate-fade-in flex flex-col items-start">
+              <div className="absolute top-12 right-0 w-48 rounded-xl shadow-xl border border-blue-100 z-50 p-4 animate-fade-in flex flex-col items-start bg-white/60 backdrop-blur-md bg-gradient-to-br from-white/60 to-blue-100/40">
                 <div className="flex items-center mb-3 w-full">
                   {user.image ? (
                     <img src={user.image} alt="Profile" className="w-10 h-10 rounded-full border border-blue-300 object-cover mr-2" />
@@ -179,8 +179,8 @@ export default function Header() {
                     <div className="text-xs text-gray-500">{user.email}</div>
                   </div>
                 </div>
-                <button onClick={() => { setProfileOpen(false); router.push('/profile'); }} className="w-full text-left py-1 px-2 rounded hover:bg-blue-50 text-blue-700 text-sm mb-1">View Profile</button>
-                <button onClick={() => { setProfileOpen(false); /* handle logout here */ }} className="w-full text-left py-1 px-2 rounded hover:bg-blue-50 text-blue-700 text-sm">Logout</button>
+                <button onClick={() => { setProfileOpen(false); router.push('/profile'); }} className="w-full text-left py-1 px-2 rounded transition hover:bg-blue-100/60 hover:ring-2 hover:ring-blue-300 text-blue-700 text-sm mb-1">View Profile</button>
+                <button onClick={() => { setProfileOpen(false); /* handle logout here */ }} className="w-full text-left py-1 px-2 rounded transition hover:bg-blue-100/60 hover:ring-2 hover:ring-blue-300 text-blue-700 text-sm">Logout</button>
               </div>
             )}
           </div>
@@ -309,7 +309,7 @@ export default function Header() {
         </button>
         {/* Dropdown */}
         {profileOpen && (
-          <div className="absolute bottom-12 right-0 w-48 bg-white rounded-xl shadow-xl border border-blue-100 z-50 p-4 animate-fade-in flex flex-col items-start">
+          <div className="absolute bottom-12 right-0 w-48 rounded-xl shadow-xl border border-blue-100 z-50 p-4 animate-fade-in flex flex-col items-start bg-white/60 backdrop-blur-md bg-gradient-to-br from-white/60 to-blue-100/40">
             <div className="flex items-center mb-3 w-full">
               {user.image ? (
                 <img src={user.image} alt="Profile" className="w-10 h-10 rounded-full border border-blue-300 object-cover mr-2" />
@@ -323,8 +323,8 @@ export default function Header() {
                 <div className="text-xs text-gray-500">{user.email}</div>
               </div>
             </div>
-            <button onClick={() => { setProfileOpen(false); router.push('/profile'); }} className="w-full text-left py-1 px-2 rounded hover:bg-blue-50 text-blue-700 text-sm mb-1">View Profile</button>
-            <button onClick={() => { setProfileOpen(false); /* handle logout here */ }} className="w-full text-left py-1 px-2 rounded hover:bg-blue-50 text-blue-700 text-sm">Logout</button>
+            <button onClick={() => { setProfileOpen(false); router.push('/profile'); }} className="w-full text-left py-1 px-2 rounded transition hover:bg-blue-100/60 hover:ring-2 hover:ring-blue-300 text-blue-700 text-sm mb-1">View Profile</button>
+            <button onClick={() => { setProfileOpen(false); /* handle logout here */ }} className="w-full text-left py-1 px-2 rounded transition hover:bg-blue-100/60 hover:ring-2 hover:ring-blue-300 text-blue-700 text-sm">Logout</button>
           </div>
         )}
       </div>
