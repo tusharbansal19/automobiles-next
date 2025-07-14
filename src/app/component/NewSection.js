@@ -105,7 +105,7 @@ export default function ServiceSection() {
           className="relative w-full md:w-[50%] hidden  sm:flex h-64 overflow-hidden rounded-lg"
         >
           <img
-            src="/Image/cardi1.jpg"
+            src="https://suzukidutacendana.com/wp-content/uploads/2023/08/part.png"
             alt="Service"
             className="w-full h-full object-cover rounded-lg border border-blue-500 transition-transform duration-500 hover:scale-105 hover:border-blue-400"
           />
@@ -124,7 +124,7 @@ export default function ServiceSection() {
           className="relative w-full md:w-[50%] hidden  sm:flex h-64 overflow-hidden rounded-lg"
         >
           <img
-            src="/Image/cardi2.jpg"
+            src="https://png.pngtree.com/png-vector/20221113/ourlarge/pngtree-auto-repair-logo-png-image_6443119.png"
             alt="Service"
             className="w-full h-full object-cover rounded-lg border border-blue-500 transition-transform duration-500 hover:scale-105 hover:border-blue-400"
           />
