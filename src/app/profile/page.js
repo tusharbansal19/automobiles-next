@@ -16,6 +16,7 @@ const sidebarLinks = [
   { label: "Profile", icon: "👤" },
   { label: "Settings", icon: "⚙️" },
   { label: "Notifications", icon: "🔔" },
+
   { label: "Logout", icon: "🚪" },
 ];
 
