@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Tushar Automobiles - Premium Auto Parts & Services",
+    default: "Tushar Automobiles - Best Price Auto Parts & Services",
     template: "%s | Tushar Automobiles"
   },
-  description: "Tushar Automobiles offers premium automobile spare parts, car services, and automotive solutions. Family-run business with 30+ years of experience in quality auto parts and reliable service.",
+  description: "Tushar Automobiles offers best price automobile spare parts, car services, and automotive solutions. Family-run business with 30+ years of experience in quality auto parts and reliable service.",
   keywords: [
     "automobile parts",
     "car spare parts", 
@@ -46,8 +46,8 @@ export const metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "Tushar Automobiles - Premium Auto Parts & Services",
-    description: "Family-run automobile business offering premium spare parts, car services, and automotive solutions with 30+ years of experience.",
+    title: "Tushar Automobiles - Best Price Auto Parts & Services",
+    description: "Family-run automobile business offering best price spare parts, car services, and automotive solutions with 30+ years of experience.",
     url: '/',
     siteName: 'Tushar Automobiles',
     images: [
@@ -63,8 +63,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Tushar Automobiles - Premium Auto Parts & Services",
-    description: "Family-run automobile business offering premium spare parts, car services, and automotive solutions.",
+    title: "Tushar Automobiles - Best Price Auto Parts & Services",
+    description: "Family-run automobile business offering best price spare parts, car services, and automotive solutions.",
     images: ['/Image/shopImg.jpg'],
   },
   robots: {
@@ -90,12 +90,13 @@ export const metadata = {
   },
   manifest: "/manifest.json",
   icons: {
-    apple: "/apple-touch-icon.png",
     icon: [
-      { url: '/favicon.ico' },
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
   },
 };
 
