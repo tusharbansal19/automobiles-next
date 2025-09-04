@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Head from "next/head";
 import {
   ChevronDown,
   User,
@@ -80,6 +81,35 @@ const MemberCard = ({ name, role, relationship, description, image, Component = 
 };
 
 export default function AboutUs() {
+  const pageStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Tushar Automobiles",
+    "description": "Learn about Tushar Automobiles - a family-run business with 30+ years of experience in automotive parts and services.",
+    "url": "https://tusharautomobiles.me/about",
+    "mainEntity": {
+      "@type": "AutoPartsStore",
+      "name": "Tushar Automobiles",
+      "foundingDate": "1990",
+      "founder": {
+        "@type": "Person",
+        "name": "Umesh Kumar Bansal"
+      },
+      "employee": [
+        {
+          "@type": "Person",
+          "name": "Tushar Bansal",
+          "jobTitle": "Manager"
+        },
+        {
+          "@type": "Person", 
+          "name": "Dev Bansal",
+          "jobTitle": "Service Head"
+        }
+      ]
+    }
+  };
+
   const members = [
     {
       name: "Umesh Kumar Bansal",
@@ -116,7 +146,21 @@ export default function AboutUs() {
   ];
 
   return (
-    <div className="bg-gradient-to-r from-black to-blue-950 min-h-screen text-white flex flex-col items-center pt-8 px-2 pb-8">
+    <>
+      <Head>
+        <title>About Us - Tushar Automobiles | Family-Run Auto Parts Business</title>
+        <meta name="description" content="Learn about Tushar Automobiles - a family-run business with 30+ years of experience in automotive parts and services. Meet our team of experts." />
+        <meta name="keywords" content="about tushar automobiles, auto parts business, family business, automotive experts, car service team" />
+        <meta property="og:title" content="About Us - Tushar Automobiles" />
+        <meta property="og:description" content="Learn about Tushar Automobiles - a family-run business with 30+ years of experience in automotive parts and services." />
+        <meta property="og:url" content="https://tusharautomobiles.me/about" />
+        <meta property="og:type" content="website" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(pageStructuredData) }}
+        />
+      </Head>
+      <div className="bg-gradient-to-r from-black to-blue-950 min-h-screen text-white flex flex-col items-center pt-8 px-2 pb-8">
       {/* Business Intro Section */}
       <div className="max-w-3xl w-full mx-auto text-center mb-10 px-4">
         <h1 className="text-5xl md:text-6xl font-extrabold text-blue-200 mb-4 mt-10 drop-shadow-lg"> Tushar Automobiles</h1>
@@ -148,6 +192,7 @@ export default function AboutUs() {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

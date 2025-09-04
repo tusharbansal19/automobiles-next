@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { FaCar, FaSearch, FaUser, FaBars, FaTimes, FaHome, FaTools, FaInfoCircle, FaRegEnvelope, FaEnvelope, FaUserTie, FaRegUser } from 'react-icons/fa';
+import { FaCar, FaSearch, FaUser, FaBars, FaTimes, FaHome, FaTools, FaInfoCircle, FaRegEnvelope, FaEnvelope, FaUserTie, FaRegUser, FaCog, FaChartBar, FaBoxes } from 'react-icons/fa';
 import { AiOutlineHome, AiOutlineCar } from 'react-icons/ai';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -17,6 +17,9 @@ export default function Header() {
   const menuRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
+
+  // Check if we're in admin section
+  const isAdminSection = pathname.startsWith('/admin');
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -36,6 +39,9 @@ export default function Header() {
     router.prefetch('/services');
     router.prefetch('/about');
     router.prefetch('/contact');
+    router.prefetch('/admin');
+    router.prefetch('/admin/inventory');
+    router.prefetch('/admin/monitoring');
   }, [router]);
 
   // Show loader on route change
@@ -95,6 +101,22 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [profileOpen]);
 
+  // Admin navigation items
+  const adminNavItems = [
+    { name: 'Dashboard', path: '/admin', icon: <FaChartBar size={20} /> },
+    { name: 'Inventory', path: '/admin/inventory', icon: <FaBoxes size={20} /> },
+    { name: 'Monitoring', path: '/admin/monitoring', icon: <FaCog size={20} /> },
+  ];
+
+  // Regular navigation items
+  const regularNavItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Cars', path: '/cars' },
+    { name: 'Services', path: '/services' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
   return (<>
     {/* Top Loader Bar */}
     {loading && (
@@ -103,32 +125,27 @@ export default function Header() {
     <header className={`fixed top-0 left-0 w-full bg-gradient-to-r from-black to-blue-900 bg-opacity-10 backdrop-blur-lg border-b-2 border-blue-400 text-white p-4 z-50 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo Section */}
-        
-
         <div className="flex items-center space-x-2">
           <FaCar size={28} className="text-blue-300" />
           <span className="text-xl font-semibold tracking-wide">
             Tushar Automobiles
+            {isAdminSection && <span className="text-sm text-blue-400 ml-2">Admin</span>}
           </span>
         </div>
 
         {/* Navigation Links */}
         <nav className="hidden md:flex space-x-6">
-          {[
-            { name: 'Home', path: '/' },
-            { name: 'Cars', path: '/cars' },
-            { name: 'Services', path: '/services' },
-            { name: 'About Us', path: '/about' },
-            { name: 'Contact', path: '/contact' },
-          ].map((item, index) => (
+          {(isAdminSection ? adminNavItems : regularNavItems).map((item, index) => (
             <div
               key={index}
               onMouseEnter={() => setHovered(index)}
-
               onMouseLeave={() => setHovered(null)}
               className="relative cursor-pointer text-blue-100 hover:text-blue-400 transition duration-300"
             >
-              <Link href={item.path} prefetch={true}>{item.name}</Link>
+              <Link href={item.path} prefetch={true} className="flex items-center gap-2">
+                {isAdminSection && item.icon}
+                {item.name}
+              </Link>
               {hovered === index && (
                 <>
                   {/* Moving Box Effect */}
@@ -195,7 +212,6 @@ export default function Header() {
       </div>
 
       {/* Mobile Dropdown */}
-
     </header>
     
     <div
@@ -205,15 +221,10 @@ export default function Header() {
         }`}
       >
         <div className=" flex flex-col space-y-6 h-full bg-blue-950 bg-opacity-10 p-8 shadow-lg border-r-2 border-blue-400">
-          {[
-            { name: 'Home', path: '/', icon: <FaCar size={22} /> },
-            { name: 'Cars', path: '/cars', icon: <FaCar size={22} /> },
-            { name: 'Services', path: '/services', icon: <FaCar size={22} /> },
-            { name: 'About Us', path: '/about', icon: <FaCar size={22} /> },
-            { name: 'Contact', path: '/contact', icon: <FaCar size={22} /> },
-          ].map((item, index) => (
+          {(isAdminSection ? adminNavItems : regularNavItems).map((item, index) => (
             <Link key={index} href={item.path} prefetch={true} onClick={() => setMenuOpen(false)}>
-              <div className="text-white text-lg font-semibold hover:bg-blue-700 hover:text-white py-3 px-4 rounded-lg transition duration-300 cursor-pointer">
+              <div className="text-white text-lg font-semibold hover:bg-blue-700 hover:text-white py-3 px-4 rounded-lg transition duration-300 cursor-pointer flex items-center gap-3">
+                {isAdminSection && item.icon}
                 {item.name}
               </div>
             </Link>
@@ -224,38 +235,38 @@ export default function Header() {
     {/* Mobile Bottom Navigator */}
     <nav className="md:hidden fixed bottom-0 left-0 w-full bg-gradient-to-r from-black to-blue-900 border-t-2 border-blue-400 z-50 flex items-center py-1 backdrop-blur-lg px-1">
       <div className="flex justify-around flex-1 gap-x-1">
-        {[
+        {(isAdminSection ? adminNavItems : [
           {
             name: 'Home',
             path: '/',
-            icon: <AiOutlineHome size={20} />, // inactive
-            activeIcon: <FaHome size={20} />, // active
+            icon: <AiOutlineHome size={20} />,
+            activeIcon: <FaHome size={20} />,
           },
           {
             name: 'Cars',
             path: '/cars',
-            icon: <AiOutlineCar size={20} />, // inactive
-            activeIcon: <FaCar size={20} />, // active
+            icon: <AiOutlineCar size={20} />,
+            activeIcon: <FaCar size={20} />,
           },
           {
             name: 'Services',
             path: '/services',
-            icon: <FaTools size={20} />, // inactive (no outline, so use same)
-            activeIcon: <FaTools size={20} />, // active
+            icon: <FaTools size={20} />,
+            activeIcon: <FaTools size={20} />,
           },
           {
             name: 'About',
             path: '/about',
-            icon: <FaInfoCircle size={20} />, // inactive (no outline, so use same)
-            activeIcon: <FaInfoCircle size={20} />, // active
+            icon: <FaInfoCircle size={20} />,
+            activeIcon: <FaInfoCircle size={20} />,
           },
           {
             name: 'Contact',
             path: '/contact',
-            icon: <FaRegEnvelope size={20} />, // inactive
-            activeIcon: <FaEnvelope size={20} />, // active
+            icon: <FaRegEnvelope size={20} />,
+            activeIcon: <FaEnvelope size={20} />,
           },
-        ].map((item, index) => {
+        ]).map((item, index) => {
           const isActive = pathname === item.path;
           return (
             <button
@@ -272,7 +283,7 @@ export default function Header() {
                 className={`transition-all duration-300 ${isActive ? 'text-blue-400' : 'text-blue-200 group-hover:text-blue-400'}`}
                 style={{ filter: isActive ? 'drop-shadow(0 0 6px #60a5fa)' : 'none' }}
               >
-                {isActive ? item.activeIcon : item.icon}
+                {isActive ? (item.activeIcon || item.icon) : item.icon}
               </span>
               <span className={`text-[10px] mt-0.5 transition-all duration-300 ${isActive ? 'text-blue-400 font-bold' : 'text-blue-200 group-hover:text-blue-400'}`}>{item.name}</span>
               {/* Animated underline */}

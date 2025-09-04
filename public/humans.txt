@@ -1,0 +1,15 @@
+/* TEAM */
+Developer: Tushar Bansal
+Contact: info@tusharautomobiles.me
+From: India
+
+/* THANKS */
+Next.js Team
+React Team
+Tailwind CSS Team
+
+/* SITE */
+Last update: 2025/01/04
+Standards: HTML5, CSS3, JavaScript ES6+
+Components: React, Next.js
+Software: VS Code, Git

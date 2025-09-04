@@ -1,0 +1,5 @@
+Contact: mailto:security@tusharautomobiles.me
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://tusharautomobiles.me/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://tusharautomobiles.me/.well-known/security.txt
