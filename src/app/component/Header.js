@@ -2,270 +2,288 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { FaCar, FaBars, FaTimes, FaHome, FaTools, FaInfoCircle, FaEnvelope, FaChartBar, FaBoxes, FaCog } from 'react-icons/fa';
-import { AiOutlineHome, AiOutlineCar } from 'react-icons/ai';
 import { usePathname, useRouter } from 'next/navigation';
+import { FaCar, FaBars, FaTimes, FaSearch, FaUser, FaHeart, FaMapMarkerAlt, FaChevronDown, FaMobileAlt, FaTools, FaChartBar, FaBoxes, FaCog, FaHome, FaEnvelope } from 'react-icons/fa';
+import { AiOutlineHome, AiOutlineCar } from 'react-icons/ai';
+
+// Navigation Data
+const NAV_MENU = {
+  "NEW CARS": [
+    { label: "Explore New Cars", href: "/cars/new" },
+    { label: "Electric Cars", href: "/cars/electric" },
+    { label: "Popular Cars", href: "/cars/popular" },
+    { label: "Upcoming Cars", href: "/cars/upcoming" },
+    { label: "New Launches", href: "/cars/launches" },
+    { label: "Car Insurance", href: "/insurance", highlight: true },
+    { label: "Popular Brands", href: "/brands" },
+    { label: "Compare Cars", href: "/compare" },
+    { label: "Find Car Dealers", href: "/dealers" },
+  ],
+  "USED CARS": [
+    { label: "Buy Used Cars", href: "/cars/used" },
+    { label: "Sell My Car", href: "/sell" },
+    { label: "Car Valuation", href: "/valuation" },
+    { label: "Used Car Dealers", href: "/used-dealers" },
+  ],
+  "NEWS & REVIEWS": [
+    { label: "Car News", href: "/news" },
+    { label: "Car Reviews", href: "/reviews" },
+    { label: "Video Reviews", href: "/videos" },
+  ],
+  "VIDEOS": [
+    { label: "New Tech", href: "/videos/tech" },
+    { label: "Test Drives", href: "/videos/test-drives" },
+  ]
+};
 
 export default function Header() {
-  const [hovered, setHovered] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [showHeader, setShowHeader] = useState(true);
-  const lastScrollY = useRef(0);
-  const menuRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
 
-  // Check if we're in admin section
+  // Admin check
   const isAdminSection = pathname?.startsWith('/admin');
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Prefetch important routes
-  useEffect(() => {
-    router.prefetch('/');
-    router.prefetch('/cars');
-    router.prefetch('/services');
-    router.prefetch('/about');
-    router.prefetch('/contact');
-  }, [router]);
-
-  // Show loader on route change
-  useEffect(() => {
-    const handleStart = (url) => {
-      if (url !== pathname) setLoading(true);
-    };
-    const handleComplete = () => setLoading(false);
-  }, [pathname, router]);
-
-  // Hide header on scroll down, show on scroll up
+  // Handle Scroll Effect
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
-        setShowHeader(false); // scroll down
-      } else {
-        setShowHeader(true); // scroll up
-      }
-      lastScrollY.current = currentScrollY;
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // User placeholder
-  const user = {
-    name: 'Tushar',
-    email: 'tushar@email.com',
-    image: null
-  };
-
-  const [profileOpen, setProfileOpen] = useState(false);
-  const profileRef = useRef(null);
-
+  // Close dropdown on route change
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
-        setProfileOpen(false);
-      }
-    };
-    if (profileOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [profileOpen]);
+    setActiveDropdown(null);
+    setMenuOpen(false);
+  }, [pathname]);
 
-  const adminNavItems = [
-    { name: 'Dashboard', path: '/admin', icon: <FaChartBar size={20} /> },
-    { name: 'Inventory', path: '/admin/inventory', icon: <FaBoxes size={20} /> },
-    { name: 'Monitoring', path: '/admin/monitoring', icon: <FaCog size={20} /> },
-  ];
-
-  const regularNavItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Cars', path: '/cars' },
-    { name: 'Services', path: '/services' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
-  const navItems = isAdminSection ? adminNavItems : regularNavItems;
+  const toggleDropdown = (menu) => {
+    setActiveDropdown(activeDropdown === menu ? null : menu);
+  };
 
   return (
     <>
-      {/* Top Loader Bar */}
-      {loading && (
-        <div className="fixed top-0 left-0 w-full h-1 h-1.5 z-[9999] bg-blue-600 animate-pulse transition-all duration-300" />
-      )}
-
       <header
-        className={`fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md text-gray-900 shadow-sm border-b border-gray-100 z-50 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
+        ref={headerRef}
+        className={`fixed top-0 left-0 w-full bg-white z-50 transition-shadow duration-300 ${scrolled ? 'shadow-md' : 'shadow-sm'}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+        {/* ROW 1: Logo, Search, Actions */}
+        <div className="border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
 
-            {/* Logo Section */}
-            <div className="flex items-center space-x-2 group cursor-pointer" onClick={() => router.push('/')}>
-              <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg">
-                <FaCar size={24} className="text-white" />
-              </div>
-              <span className="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
-                Tushar<span className="text-red-600">Auto</span>
-                {isAdminSection && <span className="text-xs ml-2 bg-gray-800 px-2 py-0.5 rounded text-white uppercase tracking-wider">Admin</span>}
-              </span>
+            {/* Logo */}
+            <div className="flex items-center gap-2 cursor-pointer flex-shrink-0" onClick={() => router.push('/')}>
+              <img src="/Image/logo.png" alt="TusharAuto Logo" className="h-14 w-auto object-contain" />
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              {navItems.map((item, index) => {
-                const isActive = pathname === item.path;
-                return (
-                  <div
-                    key={index}
-                    onMouseEnter={() => setHovered(index)}
-                    onMouseLeave={() => setHovered(null)}
-                    className="relative cursor-pointer"
-                  >
-                    <Link
-                      href={item.path}
-                      className={`flex items-center gap-2 text-sm font-bold transition-colors duration-300 ${isActive ? 'text-red-600' : 'text-gray-600 hover:text-black'}`}
-                    >
-                      {isAdminSection && item.icon}
-                      {item.name}
-                    </Link>
-                    {/* Hover Line */}
-                    <span
-                      className={`absolute left-0 -bottom-1 h-0.5 bg-red-600 transition-all duration-300 ${hovered === index || isActive ? 'w-full' : 'w-0'}`}
-                    />
-                  </div>
-                );
-              })}
-            </nav>
-
-            {/* Desktop Actions */}
-            <div className="hidden md:flex items-center space-x-6">
-              {/* Profile */}
-              <div className="relative" ref={profileRef}>
-                <button
-                  onClick={() => setProfileOpen(!profileOpen)}
-                  className="flex items-center space-x-2 focus:outline-none hover:opacity-80 transition-opacity"
-                >
-                  {user.image ? (
-                    <img src={user.image} alt="Profile" className="w-9 h-9 rounded-full border-2 border-gray-200" />
-                  ) : (
-                    <div className="w-9 h-9 rounded-full bg-gray-100 text-gray-800 border border-gray-200 flex items-center justify-center font-bold text-sm shadow-sm hover:shadow-md transition-all">
-                      {user.name?.[0]?.toUpperCase()}
-                    </div>
-                  )}
-                </button>
-
-                {/* Dropdown */}
-                {profileOpen && (
-                  <div className="absolute right-0 mt-3 w-56 bg-white rounded-lg shadow-xl overflow-hidden py-2 border border-gray-100 animate-in fade-in slide-in-from-top-2 duration-200 ring-1 ring-black/5">
-                    <div className="px-4 py-3 border-b border-gray-50 bg-gray-50/50">
-                      <p className="text-sm font-semibold text-gray-900">{user.name}</p>
-                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
-                    </div>
-                    <button onClick={() => { setProfileOpen(false); router.push('/profile'); }} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors">Profile</button>
-                    <button onClick={() => { setProfileOpen(false); }} className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-red-600 transition-colors">Logout</button>
-                  </div>
-                )}
+            {/* Search Bar (Hidden on Mobile) */}
+            <div className="hidden md:flex flex-1 max-w-xl mx-8 relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                <select className="bg-transparent text-sm text-gray-500 font-medium focus:outline-none border-r border-gray-200 pr-2 cursor-pointer">
+                  <option>All</option>
+                  <option>New</option>
+                  <option>Used</option>
+                </select>
               </div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="text-gray-600 hover:text-black p-2"
-              >
-                {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              <input
+                type="text"
+                placeholder="Search  or Ask a Question..."
+                className="w-full pl-20 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
+              />
+              <button className="absolute inset-y-0 right-0 px-4 text-gray-400 hover:text-red-600">
+                <FaSearch />
               </button>
             </div>
+
+            {/* Right Actions */}
+            <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700">
+              <div className="flex items-center gap-1 cursor-pointer hover:text-red-600">
+                <span>English</span>
+                <FaChevronDown size={10} />
+              </div>
+              <button className="flex items-center gap-1 hover:text-red-600 transition-colors">
+                <FaHeart size={18} />
+              </button>
+              <button className="flex items-center gap-2 hover:text-red-600 transition-colors">
+                <FaUser size={18} />
+                <span>Login / Register</span>
+              </button>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button className="md:hidden text-gray-700 p-2" onClick={() => setMenuOpen(true)}>
+              <FaBars size={24} />
+            </button>
           </div>
+        </div>
+
+        {/* ROW 2: Navigation Links (Hidden on Mobile) */}
+        <div className="hidden md:block border-b border-gray-100 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-12 flex items-center justify-between">
+
+            {/* Nav Menus */}
+            <nav className="flex items-center h-full">
+              {Object.keys(NAV_MENU).map((menu) => (
+                <div
+                  key={menu}
+                  className="group h-full"
+                  onMouseEnter={() => setActiveDropdown(menu)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <button
+                    className={`h-full px-4 flex items-center gap-1 text-xs font-bold tracking-wide transition-colors ${activeDropdown === menu ? 'text-red-600' : 'text-gray-800 group-hover:text-red-600'}`}
+                  >
+                    {menu}
+                    <FaChevronDown size={10} className={`transform transition-transform duration-200 ${activeDropdown === menu ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {/* Hover Line */}
+                  <div className={`absolute bottom-0 h-0.5 bg-red-600 transition-all duration-300 ${activeDropdown === menu ? 'w-full opacity-100' : 'w-0 opacity-0'} left-0`} style={{ width: activeDropdown === menu ? '100px' : '0' }} /> {/* Note: Width is tricky with absolute, relying on group hover for border-bottom on button might be better, but we stick to the plan */}
+                </div>
+              ))}
+              <Link href="/services" className="h-full px-4 flex items-center gap-1 text-xs font-bold text-gray-800 hover:text-red-600 tracking-wide">
+                SERVICES
+              </Link>
+              {isAdminSection && (
+                <Link href="/admin" className="h-full px-4 flex items-center gap-1 text-xs font-bold text-red-600 tracking-wide">
+                  ADMIN
+                </Link>
+              )}
+            </nav>
+
+            {/* Location Selector */}
+            <button className="flex items-center gap-2 text-xs font-semibold text-gray-700 hover:text-black">
+              <FaMapMarkerAlt className="text-gray-400" />
+              <span>Select City</span>
+              <FaChevronDown size={10} />
+            </button>
+          </div>
+
+          {/* MEGA MENU DROPDOWN */}
+          {activeDropdown && NAV_MENU[activeDropdown] && (
+            <div
+              className="absolute top-full left-0 w-full bg-white border-b border-t border-gray-100 shadow-xl z-40 animate-in fade-in slide-in-from-top-1 duration-200"
+              onMouseEnter={() => setActiveDropdown(activeDropdown)}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <div className="max-w-7xl mx-auto px-8 py-6">
+                <div className="flex">
+                  {/* List Column */}
+                  <div className="w-1/4 border-r border-gray-100 pr-6">
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">{activeDropdown}</h3>
+                    <ul className="space-y-3">
+                      {NAV_MENU[activeDropdown].map((item, idx) => (
+                        <li key={idx}>
+                          <Link
+                            href={item.href}
+                            className={`flex items-center justify-between group text-sm font-medium transition-colors ${item.highlight ? 'text-gray-900' : 'text-gray-600 hover:text-red-600'}`}
+                          >
+                            <span>{item.label}</span>
+                            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-red-600 text-xs">→</span>
+                            {item.highlight && <span className="ml-2 text-[10px] bg-yellow-100 text-yellow-700 px-1 rounded">AD</span>}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Featured Column (Mock Content based on menu) */}
+                  <div className="w-3/4 pl-8">
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Trending in {activeDropdown}</h3>
+                    <div className="grid grid-cols-3 gap-6">
+                      {/* Dummy trending items */}
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="group cursor-pointer">
+                          <div className="bg-gray-100 rounded-lg h-32 mb-3 overflow-hidden relative">
+                            <img src={`https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&q=80&w=300&ixlib=rb-4.0.3`} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                            {i === 1 && <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>}
+                          </div>
+                          <h4 className="font-bold text-gray-900 group-hover:text-red-600 transition-colors">2026 Sports Model {i}</h4>
+                          <p className="text-xs text-gray-500">Starts at $45,000</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      <div
-        className={`fixed inset-0 z-40 bg-black/20 backdrop-blur-sm transition-opacity duration-300 md:hidden ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
-        onClick={() => setMenuOpen(false)}
-      />
-      <div
-        ref={menuRef}
-        className={`fixed top-0 left-0 w-[280px] h-full bg-white text-gray-900 z-50 shadow-2xl transform transition-transform duration-300 ease-out border-r border-gray-100 ${menuOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-      >
-        <div className="p-6 flex flex-col h-full">
-          <div className="flex items-center space-x-2 mb-8 border-b border-gray-100 pb-6">
-            <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-              <FaCar size={18} className="text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">Tushar<span className="text-red-600">Auto</span></span>
-          </div>
+      {/* MOBILE DRAWER (Preserved Logic) */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-[60] flex md:hidden">
+          {/* Backdrop */}
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
 
-          <div className="flex flex-col space-y-2 flex-grow">
-            {navItems.map((item, index) => {
-              const isActive = pathname === item.path;
-              return (
-                <Link
-                  key={index}
-                  href={item.path}
-                  onClick={() => setMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${isActive ? 'bg-red-50 text-red-600 font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-black'}`}
-                >
-                  {item.icon || <FaTools size={16} className={isActive ? 'text-red-600' : 'text-gray-400'} />}
-                  <span className={isActive ? 'font-medium' : ''}>{item.name}</span>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="border-t border-gray-100 pt-6 mt-6 bg-gray-50 -mx-6 px-6 pb-2">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold border border-gray-300">
-                {user.name?.[0]?.toUpperCase()}
+          {/* Drawer */}
+          <div className="relative w-[300px] h-full bg-white shadow-2xl flex flex-col animate-in slide-in-from-left duration-300">
+            {/* Header */}
+            <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-gray-50">
+              <div className="flex items-center gap-2">
+                <img src="/Image/logo.png" alt="TusharAuto Logo" className="h-10 w-auto object-contain" />
               </div>
-              <div>
-                <p className="text-sm font-semibold text-gray-900">{user.name}</p>
-                <p className="text-xs text-gray-500">View Profile</p>
+              <button onClick={() => setMenuOpen(false)} className="text-gray-500 hover:text-red-600">
+                <FaTimes size={20} />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-6">
+              {/* Search Mobile */}
+              <div className="relative">
+                <input type="text" placeholder="Search..." className="w-full bg-gray-100 border-none rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-red-500" />
+                <FaSearch className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" />
+              </div>
+
+              {/* Menus */}
+              <div className="space-y-1">
+                {Object.keys(NAV_MENU).map((menu) => (
+                  <div key={menu} className="border-b border-gray-50 last:border-0">
+                    <button
+                      className="w-full flex items-center justify-between py-3 text-sm font-bold text-gray-800 hover:text-red-600"
+                      onClick={() => toggleDropdown(menu)}
+                    >
+                      {menu}
+                      <FaChevronDown className={`transform transition-transform ${activeDropdown === menu ? 'rotate-180' : ''} text-gray-400`} size={12} />
+                    </button>
+
+                    {activeDropdown === menu && (
+                      <div className="bg-gray-50 rounded-lg p-3 mb-2 space-y-2">
+                        {NAV_MENU[menu].map((item, idx) => (
+                          <Link key={idx} href={item.href} onClick={() => setMenuOpen(false)} className="block text-sm text-gray-600 hover:text-red-600 py-1 pl-2 border-l-2 border-transparent hover:border-red-600">
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <Link href="/services" onClick={() => setMenuOpen(false)} className="w-full flex items-center justify-between py-3 text-sm font-bold text-gray-800 hover:text-red-600 border-b border-gray-50">
+                  SERVICES
+                </Link>
+              </div>
+            </div>
+
+            {/* Footer Actions */}
+            <div className="p-4 border-t border-gray-100 bg-gray-50">
+              <button className="w-full py-3 bg-red-600 text-white font-bold rounded-lg mb-3 shadow-md">Login / Register</button>
+              <div className="flex justify-center gap-6 text-gray-500">
+                <FaHeart size={20} />
+                <div className="flex items-center gap-1">
+                  <FaMapMarkerAlt /> <span className="text-xs font-semibold">Select City</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Bottom Nav (Optional) */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-200 z-40 flex justify-around items-center py-2 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-        {(!isAdminSection ? [
-          { name: 'Home', path: '/', icon: <AiOutlineHome size={22} />, activeIcon: <FaHome size={22} /> },
-          { name: 'Services', path: '/services', icon: <FaTools size={20} />, activeIcon: <FaTools size={20} /> },
-          { name: 'Cars', path: '/cars', icon: <AiOutlineCar size={22} />, activeIcon: <FaCar size={22} /> },
-          { name: 'Contact', path: '/contact', icon: <FaEnvelope size={20} />, activeIcon: <FaEnvelope size={20} /> },
-        ] : adminNavItems
-        ).map((item, idx) => {
-          const isActive = pathname === item.path;
-          return (
-            <Link
-              key={idx}
-              href={item.path}
-              className={`flex flex-col items-center justify-center w-full py-1 ${isActive ? 'text-red-600' : 'text-gray-400'}`}
-            >
-              <span className="mb-1 transform transition-transform duration-200 active:scale-95">{isActive ? (item.activeIcon || item.icon) : item.icon}</span>
-              <span className="text-[10px] font-medium">{item.name}</span>
-            </Link>
-          )
-        })}
-      </nav>
+      )}
     </>
   );
 } 

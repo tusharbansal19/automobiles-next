@@ -85,77 +85,84 @@ export default function HomePage() {
   return (
     <div className="bg-white text-gray-900 font-sans">
 
-      {/* 1. HERO SECTION */}
-      <section className="pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
-
-          {/* Main Big Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-2 bg-gray-100 rounded-xl p-8 md:p-12 relative overflow-hidden flex flex-col justify-center shadow-sm group"
-
-          >
-            {/* Dual Slant Background Effect */}
-            <div className="absolute inset-y-0 left-0 w-[120%] bg-white transform -skew-x-12 -translate-x-24 z-0" />
-            <div className="absolute inset-y-0 right-0 w-[40%] bg-gray-200/50 transform -skew-x-12 translate-x-12 z-0" />
-
-
-            <div className="relative z-10 max-w-xl">
-              <span className="inline-block px-4 py-1 rounded-full bg-red-100 text-red-600 font-bold text-sm tracking-wider mb-6">PREMIUM AUTO CARE</span>
-              <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
-                Elevate Your <br />
-                <span className="text-red-600">Driving Experience</span>
-              </h1>
-              <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-                Expert maintenance, genuine parts, and certified mechanics. We treat your car like our own.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/services" className="px-8 py-3 bg-red-600 text-white font-bold rounded-lg shadow-lg hover:bg-red-700 hover:shadow-red-600/30 transition-all flex items-center gap-2">
-                  Book Service <FaChevronRight size={12} />
-                </Link>
-                <Link href="/contact" className="px-8 py-3 bg-white text-gray-900 border border-gray-200 font-bold rounded-lg hover:bg-gray-50 transition-all">
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-            <img src="/Image/carHome.jpg" alt="Hero Car" className="absolute bottom-[-10%] right-[-10%] w-[60%] object-contain opacity-20 md:opacity-100 mix-blend-multiply z-0 pointer-events-none" />
-          </motion.div>
-
-          {/* Right Column: 2 Small Cards */}
-          <div className="lg:col-span-1 flex flex-col gap-6 h-full">
-            {/* Top Small Card */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex-1 bg-gray-900 text-white rounded-xl p-8 flex flex-col justify-center relative overflow-hidden shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-2">Emergency?</h3>
-              <p className="text-gray-400 mb-6 text-sm">24/7 Roadside Assistance available.</p>
-              <Link href="/contact" className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                <FaPhoneAlt color="white" />
-              </Link>
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-red-600/20 rounded-full blur-2xl" />
-            </motion.div>
-
-            {/* Bottom Small Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex-1 bg-red-50 rounded-xl p-8 flex flex-col justify-center items-start text-left relative overflow-hidden shadow-sm border border-red-100"
-            >
-              <div className="bg-white p-3 rounded-xl mb-4 shadow-sm text-red-600">
-                <FaStar size={24} />
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900">4.9/5</h3>
-              <p className="text-gray-500 text-sm font-medium">Customer Satisfaction Rating</p>
-            </motion.div>
-          </div>
+      {/* 1. HERO SECTION WRAPPER */}
+      <div className="relative w-full pt-[150px]">
+        {/* Main Background: Slant White Top / Gray Bottom */}
+        <div className="absolute inset-0 z-0 h-full w-full bg-gray-50">
+          <div className="absolute top-0 left-0 w-full h-[80%] bg-white" style={{ clipPath: "polygon(0 0, 100% 0, 100% 85%, 0 100%)" }} />
         </div>
-      </section>
+
+        <section className="relative z-10 pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
+
+            {/* Main Big Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-2 bg-gray-100 rounded-xl p-8 md:p-12 relative overflow-hidden flex flex-col justify-center shadow-sm group"
+
+            >
+              {/* Dual Slant Background Effect */}
+              <div className="absolute inset-y-0 left-0 w-[120%] bg-white transform -skew-x-12 -translate-x-24 z-0" />
+              <div className="absolute inset-y-0 right-0 w-[40%] bg-gray-200/50 transform -skew-x-12 translate-x-12 z-0" />
+
+
+              <div className="relative z-10 max-w-xl">
+                <span className="inline-block px-4 py-1 rounded-full bg-red-100 text-red-600 font-bold text-sm tracking-wider mb-6">PREMIUM AUTO CARE</span>
+                <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
+                  Elevate Your <br />
+                  <span className="text-red-600">Driving Experience</span>
+                </h1>
+                <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                  Expert maintenance, genuine parts, and certified mechanics. We treat your car like our own.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/services" className="px-8 py-3 bg-red-600 text-white font-bold rounded-lg shadow-lg hover:bg-red-700 hover:shadow-red-600/30 transition-all flex items-center gap-2">
+                    Book Service <FaChevronRight size={12} />
+                  </Link>
+                  <Link href="/contact" className="px-8 py-3 bg-white text-gray-900 border border-gray-200 font-bold rounded-lg hover:bg-gray-50 transition-all">
+                    Contact Us
+                  </Link>
+                </div>
+              </div>
+              <img src="/Image/carHome.jpg" alt="Hero Car" className="absolute bottom-[-10%] right-[-10%] w-[60%] object-contain opacity-20 md:opacity-100 mix-blend-multiply z-0 pointer-events-none" />
+            </motion.div>
+
+            {/* Right Column: 2 Small Cards */}
+            <div className="lg:col-span-1 flex flex-col gap-6 h-full">
+              {/* Top Small Card */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="flex-1 bg-gray-900 text-white rounded-xl p-8 flex flex-col justify-center relative overflow-hidden shadow-sm"
+              >
+                <h3 className="text-2xl font-bold mb-2">Emergency?</h3>
+                <p className="text-gray-400 mb-6 text-sm">24/7 Roadside Assistance available.</p>
+                <Link href="/contact" className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                  <FaPhoneAlt color="white" />
+                </Link>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-red-600/20 rounded-full blur-2xl" />
+              </motion.div>
+
+              {/* Bottom Small Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex-1 bg-red-50 rounded-xl p-8 flex flex-col justify-center items-start text-left relative overflow-hidden shadow-sm border border-red-100"
+              >
+                <div className="bg-white p-3 rounded-xl mb-4 shadow-sm text-red-600">
+                  <FaStar size={24} />
+                </div>
+                <h3 className="text-3xl font-bold text-gray-900">4.9/5</h3>
+                <p className="text-gray-500 text-sm font-medium">Customer Satisfaction Rating</p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* 2. INFO BAR */}
       <div className="bg-gray-50 border-y border-gray-100">
@@ -184,28 +191,28 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Brands We Service</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {[
-                { name: "Maruti Suzuki", url: "https://logo.clearbit.com/marutisuzuki.com" },
-                { name: "Hyundai", url: "https://logo.clearbit.com/hyundai.com" },
-                { name: "Honda", url: "https://logo.clearbit.com/honda.com" },
-                { name: "Tata", url: "https://logo.clearbit.com/tatamotors.com" },
-                { name: "Mahindra", url: "https://logo.clearbit.com/mahindra.com" },
-                { name: "Toyota", url: "https://logo.clearbit.com/toyota.com" },
-                { name: "Volkswagen", url: "https://logo.clearbit.com/vw.com" },
-                { name: "Kia", url: "https://logo.clearbit.com/kia.com" },
-                { name: "Renault", url: "https://logo.clearbit.com/renault.com" },
-                { name: "Ford", url: "https://logo.clearbit.com/ford.com" },
-                { name: "Mercedes-Benz", url: "https://logo.clearbit.com/mercedes-benz.com" },
-                { name: "Skoda", url: "https://logo.clearbit.com/skoda-auto.com" }
+                { name: "Maruti Suzuki", url: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Maruti_Suzuki_logo.svg" },
+                { name: "Hyundai", url: "https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg" },
+                { name: "Honda", url: "https://upload.wikimedia.org/wikipedia/commons/3/38/Honda.svg" },
+                { name: "Tata", url: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Tata_logo.svg" },
+                { name: "Mahindra", url: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Mahindra_Auto_logo.svg" },
+                { name: "Toyota", url: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg" },
+                { name: "Volkswagen", url: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Volkswagen_logo_2019.svg" },
+                { name: "Kia", url: "https://upload.wikimedia.org/wikipedia/commons/4/47/Kia_logo.svg" },
+                { name: "Renault", url: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Renault_2021_Textless.svg" },
+                { name: "Ford", url: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg" },
+                { name: "Mercedes-Benz", url: "https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Benz_logo.svg" },
+                { name: "Skoda", url: "https://upload.wikimedia.org/wikipedia/commons/a/ac/Skoda_Auto_logo_%282011%29.svg" }
               ].map((brand, idx) => (
-                <div key={idx} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col items-center justify-center border border-gray-100">
+                <div key={idx} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col items-center justify-center border border-gray-100 h-32">
                   <img
                     src={brand.url}
                     alt={brand.name}
-                    className="w-12 h-12 object-contain mb-3 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                    className="h-12 w-auto max-w-full object-contain mb-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                     onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }}
                   />
                   <span className="hidden text-xs font-bold text-gray-400 uppercase tracking-widest">{brand.name[0]}</span>
-                  <span className="text-xs font-semibold text-gray-900">{brand.name}</span>
+                  <span className="text-xs font-semibold text-gray-900 mt-2">{brand.name}</span>
                 </div>
               ))}
             </div>
@@ -493,7 +500,7 @@ export default function HomePage() {
         <div className="h-full w-full bg-gray-200 relative">
           {/* Placeholder Map Image */}
           <iframe
-            src="https://maps.google.com/maps?q=Tushar+Automobile+&+Spare+Parts,+Siyana,+Uttar+Pradesh&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1545.6983827531778!2d78.0547183!3d28.6240976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390b6529b8b665c9%3A0x62e65ac685562995!2sTushar%20Automobile%20%26%20Spare%20Parts!5e0!3m2!1sen!2sin!4v1703670000000!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}
