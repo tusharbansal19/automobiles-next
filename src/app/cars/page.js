@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FaCar, FaGasPump, FaRupeeSign, FaCogs, FaStar, FaBars, FaTimes, FaFilter, FaHeart, FaShare, FaEye, FaTachometerAlt, FaCalendarAlt } from "react-icons/fa";
+import { FaCar, FaGasPump, FaRupeeSign, FaCogs, FaStar, FaBars, FaTimes, FaFilter, FaHeart, FaShare, FaEye, FaTachometerAlt, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 // eslint-disable-next-line @next/next/no-img-element
 const DUMMY_CARS = [
@@ -98,7 +98,7 @@ export default function CarPage() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -173,15 +173,15 @@ export default function CarPage() {
   const FilterContent = () => (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-gray-700 pb-4">
-        <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <FaFilter className="text-blue-400" /> 
+      <div className="flex items-center justify-between border-b border-gray-200 pb-4">
+        <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <FaFilter className="text-blue-600" />
           Filters
         </h2>
         {isMobile && (
           <button
             onClick={() => setSidebarOpen(false)}
-            className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-800 rounded-lg"
+            className="text-gray-500 hover:text-gray-900 transition-colors p-2 hover:bg-gray-100 rounded-lg"
           >
             <FaTimes size={20} />
           </button>
@@ -192,7 +192,7 @@ export default function CarPage() {
       {hasActiveFilters && (
         <button
           onClick={clearAllFilters}
-          className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition-colors"
+          className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg transition-colors font-medium shadow-sm"
         >
           Clear All Filters
         </button>
@@ -200,8 +200,8 @@ export default function CarPage() {
 
       {/* Price Filter */}
       <div className="space-y-3">
-        <h3 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
-          <FaRupeeSign className="text-green-400" /> Price Range
+        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+          <FaRupeeSign className="text-green-600" /> Price Range
         </h3>
         <div className="space-y-2">
           {PRICE_FILTERS.map((range) => (
@@ -212,18 +212,17 @@ export default function CarPage() {
                 onChange={() => handlePriceChange(range)}
                 className="sr-only"
               />
-              <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center transition-all ${
-                selectedPrices.some((r) => r.label === range.label)
-                  ? 'bg-blue-600 border-blue-600'
-                  : 'border-gray-400 group-hover:border-blue-400'
-              }`}>
+              <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center transition-all ${selectedPrices.some((r) => r.label === range.label)
+                ? 'bg-blue-600 border-blue-600'
+                : 'border-gray-300 group-hover:border-blue-400'
+                }`}>
                 {selectedPrices.some((r) => r.label === range.label) && (
                   <svg className="w-3 h-3 text-white fill-current" viewBox="0 0 20 20">
-                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/>
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                   </svg>
                 )}
               </div>
-              <span className="text-gray-300 group-hover:text-white transition-colors">{range.label}</span>
+              <span className="text-gray-600 group-hover:text-blue-600 transition-colors">{range.label}</span>
             </label>
           ))}
         </div>
@@ -231,8 +230,8 @@ export default function CarPage() {
 
       {/* Fuel Filter */}
       <div className="space-y-3">
-        <h3 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
-          <FaGasPump className="text-orange-400" /> Fuel Type
+        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+          <FaGasPump className="text-orange-500" /> Fuel Type
         </h3>
         <div className="space-y-2">
           {FUEL_FILTERS.map((fuel) => (
@@ -243,18 +242,17 @@ export default function CarPage() {
                 onChange={() => handleFuelChange(fuel)}
                 className="sr-only"
               />
-              <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center transition-all ${
-                selectedFuels.includes(fuel)
-                  ? 'bg-blue-600 border-blue-600'
-                  : 'border-gray-400 group-hover:border-blue-400'
-              }`}>
+              <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center transition-all ${selectedFuels.includes(fuel)
+                ? 'bg-blue-600 border-blue-600'
+                : 'border-gray-300 group-hover:border-blue-400'
+                }`}>
                 {selectedFuels.includes(fuel) && (
                   <svg className="w-3 h-3 text-white fill-current" viewBox="0 0 20 20">
-                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/>
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                   </svg>
                 )}
               </div>
-              <span className="text-gray-300 group-hover:text-white transition-colors">{fuel}</span>
+              <span className="text-gray-600 group-hover:text-blue-600 transition-colors">{fuel}</span>
             </label>
           ))}
         </div>
@@ -262,8 +260,8 @@ export default function CarPage() {
 
       {/* Transmission Filter */}
       <div className="space-y-3">
-        <h3 className="text-lg font-semibold text-gray-200 flex items-center gap-2">
-          <FaCogs className="text-blue-400" /> Transmission
+        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+          <FaCogs className="text-blue-600" /> Transmission
         </h3>
         <div className="space-y-2">
           {TRANS_FILTERS.map((trans) => (
@@ -274,18 +272,17 @@ export default function CarPage() {
                 onChange={() => handleTransChange(trans)}
                 className="sr-only"
               />
-              <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center transition-all ${
-                selectedTrans.includes(trans)
-                  ? 'bg-blue-600 border-blue-600'
-                  : 'border-gray-400 group-hover:border-blue-400'
-              }`}>
+              <div className={`w-5 h-5 rounded border-2 mr-3 flex items-center justify-center transition-all ${selectedTrans.includes(trans)
+                ? 'bg-blue-600 border-blue-600'
+                : 'border-gray-300 group-hover:border-blue-400'
+                }`}>
                 {selectedTrans.includes(trans) && (
                   <svg className="w-3 h-3 text-white fill-current" viewBox="0 0 20 20">
-                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/>
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                   </svg>
                 )}
               </div>
-              <span className="text-gray-300 group-hover:text-white transition-colors">{trans}</span>
+              <span className="text-gray-600 group-hover:text-blue-600 transition-colors">{trans}</span>
             </label>
           ))}
         </div>
@@ -294,12 +291,12 @@ export default function CarPage() {
   );
 
   return (
-    <div className="min-h-screen  bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <div className="flex">
+    <div className="min-h-screen bg-slate-50 pt-20">
+      <div className="flex max-w-[1600px] mx-auto">
         {/* Sidebar: always visible on desktop, toggled on mobile */}
         <aside
           className={`
-            hidden lg:block w-80 bg-slate-900/95 border-r border-blue-500/30 p-6 min-h-screen sticky top-0 backdrop-blur-xl
+            hidden lg:block w-80 bg-white border-r border-slate-100 p-6 min-h-screen sticky top-20
             ${!isMobile ? '' : 'hidden'}
           `}
         >
@@ -308,7 +305,7 @@ export default function CarPage() {
         {/* Mobile Sidebar */}
         <aside
           className={`
-            lg:hidden fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-slate-900/95 backdrop-blur-xl border-r border-blue-500/30 p-6 z-50 transition-transform duration-300 shadow-2xl
+            lg:hidden fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white border-r border-slate-100 p-6 z-50 transition-transform duration-300 shadow-2xl
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           `}
         >
@@ -317,7 +314,7 @@ export default function CarPage() {
         {/* Mobile Overlay */}
         {sidebarOpen && isMobile && (
           <div
-            className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            className="lg:hidden fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -326,14 +323,14 @@ export default function CarPage() {
           {/* Header with Filter Button */}
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 gap-4">
             <div>
-              <h1 className="text-3xl mt-20 lg:text-4xl font-bold text-white mb-2">Premium Cars</h1>
-              <p className="text-gray-300">Find your perfect ride from our curated collection</p>
+              <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2">Premium Cars</h1>
+              <p className="text-slate-500">Find your perfect ride from our curated collection</p>
             </div>
-            
+
             {/* Mobile Filter Button (fixed bottom left) */}
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden fixed left-4 bottom-6 z-50 flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-blue-500/25"
+              className="lg:hidden fixed left-4 bottom-6 z-50 flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700"
               aria-label="Open filters sidebar"
             >
               <FaFilter className="text-sm" />
@@ -348,100 +345,93 @@ export default function CarPage() {
 
           {/* Results Count */}
           <div className="mb-6">
-            <p className="text-gray-300">
-              Showing <span className="text-white font-semibold">{filteredCars.length}</span> cars
+            <p className="text-slate-600">
+              Showing <span className="text-slate-900 font-bold">{filteredCars.length}</span> cars
             </p>
           </div>
 
           {/* Car Cards Grid */}
-          <div className="w-full max-h-[70vh] overflow-y-auto scrollbar-hide">
-            <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="w-full">
+            <main className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
               {filteredCars.length === 0 ? (
                 <div className="col-span-full text-center py-16">
-                  <FaCar className="mx-auto text-6xl text-gray-600 mb-4" />
-                  <h3 className="text-2xl font-semibold text-gray-400 mb-2">No cars found</h3>
-                  <p className="text-gray-500">Try adjusting your filters to see more results</p>
+                  <FaCar className="mx-auto text-6xl text-slate-300 mb-4" />
+                  <h3 className="text-2xl font-semibold text-slate-500 mb-2">No cars found</h3>
+                  <p className="text-slate-400">Try adjusting your filters to see more results</p>
                 </div>
               ) : (
                 filteredCars.map((car) => (
                   <div
                     key={car.id}
-                    className="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-700 hover:border-blue-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2"
+                    className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-slate-100"
                   >
                     {/* Image Container */}
-                    <div className="relative overflow-hidden">
+                    <div className="relative overflow-hidden h-56">
                       <img
                         src={car.image}
                         alt={car.name}
-                        className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      
+
                       {/* Year Badge */}
-                      <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                      <div className="absolute top-4 left-4 bg-blue-600/90 backdrop-blur-sm text-white px-3 py-1 rounded-md text-sm font-bold shadow-sm">
                         {car.year}
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute top-4 right-4 flex gap-2">
                         <button
                           onClick={() => toggleFavorite(car.id)}
-                          className={`p-2 rounded-full backdrop-blur-md transition-all duration-300 ${
-                            favorites.has(car.id) 
-                              ? 'bg-red-500 text-white' 
-                              : 'bg-white/10 text-white hover:bg-red-500'
-                          }`}
+                          className={`p-2 rounded-full shadow-sm transition-all duration-200 ${favorites.has(car.id)
+                            ? 'bg-red-500 text-white'
+                            : 'bg-white/90 text-slate-400 hover:text-red-500'
+                            }`}
                         >
-                          <FaHeart size={14} />
-                        </button>
-                        <button className="p-2 rounded-full bg-white/10 backdrop-blur-md text-white hover:bg-blue-500 transition-all duration-300">
-                          <FaShare size={14} />
+                          <FaHeart size={16} />
                         </button>
                       </div>
-
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 space-y-4">
-                      {/* Title and Rating */}
-                      <div className="flex items-start justify-between">
-                        <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 leading-tight">
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-xl font-bold text-slate-900 line-clamp-1" title={car.name}>
                           {car.name}
                         </h3>
-                        <div className="flex items-center gap-1 bg-yellow-500/20 px-2 py-1 rounded-full">
-                          <FaStar className="text-yellow-400 text-xs" />
-                          <span className="text-yellow-400 text-sm font-semibold">{car.rating}</span>
+                        <div className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded text-green-700 text-xs font-bold border border-green-100">
+                          <FaStar /> {car.rating}
                         </div>
                       </div>
 
-                      {/* Location */}
-                      <p className="text-gray-400 text-sm">{car.location}</p>
+                      <p className="text-slate-500 text-sm mb-4 flex items-center gap-1">
+                        <FaMapMarkerAlt className="text-red-500" /> {car.location}
+                      </p>
 
                       {/* Stats Grid */}
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="flex items-center gap-2 text-gray-300">
-                          <FaTachometerAlt className="text-blue-400" />
-                          <span className="text-sm">{car.kms}</span>
+                      <div className="grid grid-cols-2 gap-y-3 gap-x-4 mb-6">
+                        <div className="flex items-center gap-2 text-slate-600 text-sm">
+                          <FaTachometerAlt className="text-blue-500" /> {car.kms}
                         </div>
-                        <div className="flex items-center gap-2 text-gray-300">
-                          <FaGasPump className="text-orange-400" />
-                          <span className="text-sm">{car.fuel}</span>
+                        <div className="flex items-center gap-2 text-slate-600 text-sm">
+                          <FaGasPump className="text-orange-500" /> {car.fuel}
                         </div>
-                        <div className="flex items-center gap-2 text-gray-300">
-                          <FaCogs className="text-blue-400" />
-                          <span className="text-sm">{car.transmission}</span>
+                        <div className="flex items-center gap-2 text-slate-600 text-sm">
+                          <FaCogs className="text-slate-400" /> {car.transmission}
                         </div>
-                        <div className="flex items-center gap-2 text-gray-300">
-                          <FaEye className="text-green-400" />
-                          <span className="text-sm">{car.views} views</span>
+                        <div className="flex items-center gap-2 text-slate-600 text-sm">
+                          <FaCalendarAlt className="text-green-500" /> {car.year}
                         </div>
                       </div>
-                    </div>
 
-                    {/* Animated Border Effect */}
-                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/20 via-blue-500/20 to-pink-500/20 animate-pulse" />
+                      {/* Footer */}
+                      <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                        <div className="text-2xl font-bold text-slate-900">
+                          {car.priceLabel}
+                        </div>
+                        <button className="px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
+                          View Details
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))

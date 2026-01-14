@@ -35,238 +35,153 @@ export default function ContactUs() {
     else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(formData.email)) newErrors.email = 'Enter a valid email.';
     if (!formData.message) newErrors.message = 'Message is required.';
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length > 0) {
-      toast.error('Please correct the errors below.', {
-        position: 'top-right',
-        style: {
-          background: 'linear-gradient(90deg, #0f2027 0%, #2c5364 100%)',
-          color: '#aee7ff',
-          border: '1px solid #3b82f6',
-          boxShadow: '0 0 20px #3b82f6, 0 0 40px #0ea5e9',
-        },
-        icon: '⚠️',
-      });
+      toast.error('Please fix the errors.', { position: 'top-right' });
       return;
     }
+
     setLoading(true);
     try {
       const response = await fetch("https://grabeats-server.onrender.com/user/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       setLoading(false);
       if (response.ok) {
-        toast.success("Message sent successfully!", {
-          position: "top-right",
-          style: {
-            background: "linear-gradient(90deg, #0f2027 0%, #2c5364 100%)",
-            color: "#aee7ff",
-            border: "1px solid #3b82f6",
-            boxShadow: "0 0 20px #3b82f6, 0 0 40px #0ea5e9",
-          },
-          icon: "🚀",
-        });
+        toast.success("Message sent successfully!", { position: "top-right" });
         setFormData({ name: "", email: "", message: "" });
         setErrors({});
       } else {
-        toast.error("Failed to send message. Try again later.", {
-          position: "top-right",
-          style: {
-            background: "linear-gradient(90deg, #0f2027 0%, #2c5364 100%)",
-            color: "#aee7ff",
-            border: "1px solid #3b82f6",
-            boxShadow: "0 0 20px #3b82f6, 0 0 40px #0ea5e9",
-          },
-          icon: "❌",
-        });
+        toast.error("Failed to send message.", { position: "top-right" });
       }
     } catch (error) {
       setLoading(false);
-      toast.error("Failed to send message. Try again later.", {
-        position: "top-right",
-        style: {
-          background: "linear-gradient(90deg, #0f2027 0%, #2c5364 100%)",
-          color: "#aee7ff",
-          border: "1px solid #3b82f6",
-          boxShadow: "0 0 20px #3b82f6, 0 0 40px #0ea5e9",
-        },
-        icon: "❌",
-      });
+      toast.error("An error occurred. Try again.", { position: "top-right" });
     }
   };
 
   return (
     <>
       <ToastContainer />
-      <div className="bg-gradient-to-r mt-20 from-black to-blue-950 min-h-screen text-white py-12 px-4 sm:px-8">
-        {/* Contact Details Section */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Section */}
-          <div className="opacity-0 translate-x-[-20px] transition-all duration-700 ease-in-out slide-in">
-            <h2 className="text-4xl font-bold text-blue-300 mb-6 animate-bounce">
-              Contact Us
-            </h2>
-            <div className="space-y-4">
-  {/* Shop Name */}
-  <p className="text-lg">
-    <span className="font-semibold text-blue-400 hover:text-blue-500 transition duration-300 inline-block transform origin-top hover:rotate-[360deg]">
-      Shop Name:
-    </span>{" "}
-    <span className="hover:font-bold hover:text-xl transition duration-300">
-      Tushar Automobiles
-    </span>
-  </p>
+      <div className="bg-gray-50 min-h-screen pt-24 pb-12 px-4 sm:px-8 text-gray-800">
 
-  {/* Owner */}
-  <p className="text-lg">
-    <span className="font-semibold text-blue-400 hover:text-blue-500 transition duration-300 inline-block transform origin-top hover:rotate-[360deg]">
-      Owner:
-    </span>{" "}
-    <span className="hover:font-bold hover:text-xl transition duration-300">
-      Umesh Kumar Bansal
-    </span>
-  </p>
-
-  {/* Contact No */}
-  <p className="text-lg">
-    <span className="font-semibold text-blue-400 hover:text-blue-500 transition duration-300 inline-block transform origin-top hover:rotate-[360deg]">
-      Contact No:
-    </span>{" "}
-    <a
-      href="tel:+919719167530"
-      className="hover:font-bold hover:text-xl hover:text-blue-300 transition duration-300 ease-in-out"
-    >
-      +91 9719167530
-    </a>{" "}
-    /{" "}
-    <a
-      href="tel:+919084970968"
-      className="hover:font-bold hover:text-xl hover:text-blue-300 transition duration-300 ease-in-out"
-    >
-      +91 9084970968
-    </a>
-  </p>
-
-  {/* Address */}
-  <p className="text-lg">
-    <span className="font-semibold text-blue-400 hover:text-blue-500 transition duration-300 inline-block transform origin-top hover:rotate-[360deg]">
-      Address:
-    </span>{" "}
-    <span className="hover:font-bold hover:text-xl transition duration-300">
-      Bulandshahr Stand, Siyana, Bulandshahar
-    </span>
-  </p>
-</div>
-
-          </div>
-
-          {/* Right Section - Interactive Map */}
-          <iframe
-            title="Tushar Automobile & Spare Parts"
-            className="w-full h-72 rounded-lg shadow-lg border border-blue-500 hover:scale-105 hover:shadow-xl transition-transform duration-300 ease-in-out"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279.0306814528439!2d78.0547344!3d28.6240976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390b6529b8b665c9%3A0x62e65ac685562995!2sTushar%20Automobile%20%26%20Spare%20Parts!5e0!3m2!1sen!2sin!4v1710150351161!5m2!1sen!2sin"
-            // allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+        {/* Header Section */}
+        <div className="max-w-7xl mx-auto text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get in Touch</h1>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">We are here to help. Reach out to us for any service inquiries or parts availability.</p>
         </div>
 
-        {/* Contact Form Section */}
-        <div className="mt-12 bg-blue-950 bg-opacity-20 p-8 rounded-xl shadow-lg border border-blue-600 transition-transform transform hover:-translate-y-1 hover:shadow-xl animate-fadeIn relative">
-          <h3 className="text-2xl font-semibold text-blue-300 mb-6">
-            Send us a message
-          </h3>
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Side - Image */}
-            <div className="hidden md:flex items-center justify-center">
-              <img
-                src="https://th.bing.com/th/id/OIP.ABZDYb1aT89tuZw5boXZcQHaG0?rs=1&pid=ImgDetMain"
-                alt="Contact Illustration"
-                width="400"
-                height="300"
-                className="w-full h-auto rounded-lg shadow-lg border border-blue-500 hover:scale-105 transition duration-300"
-                loading="lazy"
-              />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+          {/* Left Section: Info & Map */}
+          <div className="space-y-12 slide-in opacity-0 -translate-x-10 transition-all duration-700 ease-out">
+
+            {/* Contact Details */}
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-red-600 pl-4">Contact Information</h2>
+              <div className="space-y-6 text-gray-700">
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Owner</span>
+                  <span className="text-xl font-medium">Umesh Kumar Bansal</span>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Phone</span>
+                  <div className="flex gap-4 mt-1">
+                    <a href="tel:+919719167530" className="text-blue-600 hover:text-blue-800 font-medium transition-colors">+91 9719167530</a>
+                    <span className="text-gray-300">|</span>
+                    <a href="tel:+919084970968" className="text-blue-600 hover:text-blue-800 font-medium transition-colors">+91 9084970968</a>
+                  </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Address</span>
+                  <p className="text-lg leading-snug mt-1">
+                    Bulandshahr Stand, Siyana, <br /> Bulandshahar, UP
+                  </p>
+                </div>
+              </div>
             </div>
 
-            {/* Right Side - Form */}
-            <div className="space-y-4">
-              {/* Name Field */}
+            {/* Map */}
+            <div className="w-full h-80 rounded-2xl overflow-hidden shadow-lg border border-gray-200 bg-gray-200">
+              <iframe
+                title="Google Map"
+                className="w-full h-full"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279.0306814528439!2d78.0547344!3d28.6240976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390b6529b8b665c9%3A0x62e65ac685562995!2sTushar%20Automobile%20%26%20Spare%20Parts!5e0!3m2!1sen!2sin!4v1710150351161!5m2!1sen!2sin"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+
+          {/* Right Section: Form */}
+          <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100 h-fit">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Send us a Message</h3>
+            <p className="text-gray-500 mb-8 mb-8">Fill out the form below and we will get back to you shortly.</p>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+
               <div>
-                <label htmlFor="name" className="block text-blue-400 mb-1">
-                  Name
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                 <input
                   type="text"
-                  id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 bg-blue-950 text-white border ${errors.name ? 'border-red-500' : 'border-blue-600'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 hover:scale-105 transition duration-300`}
-                  placeholder="Your Name"
+                  className={`w-full px-4 py-3 bg-gray-50 border ${errors.name ? 'border-red-500' : 'border-gray-200'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                  placeholder="John Doe"
                 />
-                {errors.name && <p className="text-red-400 text-sm mt-1 animate-fadeInLeft">{errors.name}</p>}
+                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
               </div>
 
-              {/* Email Field */}
               <div>
-                <label htmlFor="email" className="block text-blue-400 mb-1">
-                  Email
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 bg-blue-950 text-white border ${errors.email ? 'border-red-500' : 'border-blue-600'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 hover:scale-105 transition duration-300`}
-                  placeholder="Your Email"
+                  className={`w-full px-4 py-3 bg-gray-50 border ${errors.email ? 'border-red-500' : 'border-gray-200'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                  placeholder="john@example.com"
                 />
-                {errors.email && <p className="text-red-400 text-sm mt-1 animate-fadeInLeft">{errors.email}</p>}
+                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
               </div>
 
-              {/* Message Field */}
               <div>
-                <label htmlFor="message" className="block text-blue-400 mb-1">
-                  Message
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                 <textarea
-                  id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  rows="4"
-                  className={`w-full px-4 py-2 bg-blue-950 text-white border ${errors.message ? 'border-red-500' : 'border-blue-600'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 hover:scale-105 transition duration-300`}
-                  placeholder="Your Message"
+                  rows="5"
+                  className={`w-full px-4 py-3 bg-gray-50 border ${errors.message ? 'border-red-500' : 'border-gray-200'} rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                  placeholder="How can we help you?"
                 ></textarea>
-                {errors.message && <p className="text-red-400 text-sm mt-1 animate-fadeInLeft">{errors.message}</p>}
+                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
               </div>
 
-              {/* Submit Button */}
-              <div>
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 rounded-lg transition-transform transform hover:scale-110 duration-300 hover:shadow-blue-400 hover:shadow-lg flex items-center justify-center gap-2 relative"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <svg className="animate-spin h-6 w-6 text-blue-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="#3b82f6" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="#60a5fa" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-                      </svg>
-                      <span className="text-blue-100 font-semibold animate-pulse">Sending...</span>
-                    </>
-                  ) : (
-                    'Send Message'
-                  )}
-                </button>
-              </div>
-            </div>
-          </form>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-blue-500/30 transition-all transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center"
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  "Send Message"
+                )}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </>
