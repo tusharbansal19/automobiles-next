@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import {
@@ -12,11 +12,28 @@ import {
 // 0. DIVINE SECTION (Ganpati Bappa)
 // ----------------------------------------------------------------------
 const DivineSection = () => {
+  // Fix hydration mismatch by generating particles on client side only
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    // Generate particles only on client to match hydration
+    const newParticles = [...Array(30)].map(() => ({
+      x: Math.random() * 200 - 100,
+      duration: 3 + Math.random() * 3,
+      delay: Math.random() * 3,
+      width: Math.random() * 8 + 2,
+      height: Math.random() * 8 + 2,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+    }));
+    setParticles(newParticles);
+  }, []); // Run once on mount
+
   return (
     <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-orange-50 via-red-50 to-amber-50 overflow-hidden py-12">
 
       {/* GLOBAL BACKGROUND PARTICLES */}
-      {[...Array(30)].map((_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
           className="absolute bg-amber-400 rounded-full blur-[1px]"
@@ -25,18 +42,18 @@ const DivineSection = () => {
             opacity: [0, 0.8, 0],
             scale: [0, 1.5, 0],
             y: -150,
-            x: Math.random() * 200 - 100
+            x: p.x
           }}
           transition={{
-            duration: 3 + Math.random() * 3,
+            duration: p.duration,
             repeat: Infinity,
-            delay: Math.random() * 3
+            delay: p.delay
           }}
           style={{
-            width: Math.random() * 8 + 2,
-            height: Math.random() * 8 + 2,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            width: p.width,
+            height: p.height,
+            left: p.left,
+            top: p.top,
           }}
         />
       ))}

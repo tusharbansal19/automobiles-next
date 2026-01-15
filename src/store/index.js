@@ -1,22 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import inventoryReducer from './inventorySlice';
-
-export const store = configureStore({
-  reducer: {
-    inventory: inventoryReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
-      },
-    }),
-});
+import authReducer from './authSlice';
+import uiReducer from './uiSlice';
 
 // LocalStorage persistence
 const loadState = () => {
+  if (typeof window === 'undefined') return undefined;
   try {
-    const serializedState = localStorage.getItem('inventoryState');
+    const serializedState = localStorage.getItem('appState');
     if (serializedState === null) {
       return undefined;
     }
@@ -28,20 +19,33 @@ const loadState = () => {
 
 const saveState = (state) => {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem('inventoryState', serializedState);
+    const serializedState = JSON.stringify({
+      inventory: state.inventory,
+      auth: state.auth
+    });
+    localStorage.setItem('appState', serializedState);
   } catch (err) {
     // Ignore write errors
   }
 };
 
-// Subscribe to store changes and save to localStorage
+const preloadedState = loadState();
+
+export const store = configureStore({
+  reducer: {
+    inventory: inventoryReducer,
+    auth: authReducer,
+    ui: uiReducer,
+  },
+  preloadedState,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+      },
+    }),
+});
+
 store.subscribe(() => {
   saveState(store.getState());
 });
-
-// Load initial state from localStorage
-const persistedState = loadState();
-if (persistedState) {
-  store.dispatch({ type: 'inventory/rehydrate', payload: persistedState.inventory });
-} 

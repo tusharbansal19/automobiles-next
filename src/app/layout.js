@@ -4,6 +4,7 @@ import Header from "./component/Header";
 import Footer from "./component/Footer";
 import PageWrapper from "./component/Pagewrapper";
 import { Providers } from './providers';
+import ProtectedRoute from './ProtectedRoute';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -210,9 +211,11 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <Header />
-          <PageWrapper>
-            {children}
-          </PageWrapper>
+          <ProtectedRoute>
+            <PageWrapper>
+              {children}
+            </PageWrapper>
+          </ProtectedRoute>
           <Footer />
         </Providers>
       </body>
