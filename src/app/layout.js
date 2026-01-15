@@ -91,13 +91,9 @@ export const metadata = {
   },
   manifest: "/manifest.json",
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: "/apple-touch-icon.png",
-    shortcut: "/favicon.ico",
+    icon: '/Image/logo.png',
+    apple: '/Image/logo.png',
+    shortcut: '/Image/logo.png',
   },
 };
 
