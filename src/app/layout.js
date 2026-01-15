@@ -36,6 +36,9 @@ export const metadata = {
   ],
   authors: [{ name: "Tushar Bansal" }],
   creator: "Tushar Automobiles",
+  applicationName: 'Tushar Automobiles',
+  referrer: 'origin-when-cross-origin',
+  themeColor: '#ffffff',
   publisher: "Tushar Automobiles",
   formatDetection: {
     email: false,
@@ -45,6 +48,9 @@ export const metadata = {
   metadataBase: new URL('https://tusharautomobiles.me'),
   alternates: {
     canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
   },
   openGraph: {
     title: "Tushar Automobiles - Best Price Auto Parts & Services",
@@ -57,6 +63,14 @@ export const metadata = {
         width: 1200,
         height: 630,
         alt: 'Tushar Automobiles Shop',
+        type: 'image/jpeg',
+      },
+      {
+        url: '/Image/logo.png',
+        width: 800,
+        height: 600,
+        alt: 'Tushar Automobiles Logo',
+        type: 'image/png',
       },
     ],
     locale: 'en_US',
@@ -66,7 +80,8 @@ export const metadata = {
     card: 'summary_large_image',
     title: "Tushar Automobiles - Best Price Auto Parts & Services",
     description: "Family-run automobile business offering best price spare parts, car services, and automotive solutions.",
-    images: ['/Image/shopImg.jpg'],
+    images: ['/Image/shopImg.jpg'], // Twitter uses og:image usually, but explicitly setting it is fine.
+    creator: '@TusharAutomobiles', // Placeholder handle if exists
   },
   robots: {
     index: true,
@@ -88,6 +103,10 @@ export const metadata = {
   classification: 'Business',
   appleWebApp: {
     title: "Tushar Automobiles",
+    statusBarStyle: "black-translucent",
+    startupImage: [
+      '/Image/logo.png',
+    ],
   },
   manifest: "/manifest.json",
   icons: {
