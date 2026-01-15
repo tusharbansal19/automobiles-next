@@ -13,28 +13,28 @@ import {
 // ----------------------------------------------------------------------
 const DivineSection = () => {
   return (
-    <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-orange-100 via-red-50 to-yellow-50 overflow-hidden py-12">
+    <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center bg-gradient-to-br from-orange-50 via-red-50 to-amber-50 overflow-hidden py-12">
 
       {/* GLOBAL BACKGROUND PARTICLES */}
-      {[...Array(20)].map((_, i) => (
+      {[...Array(30)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute bg-yellow-400 rounded-full"
+          className="absolute bg-amber-400 rounded-full blur-[1px]"
           initial={{ opacity: 0, scale: 0 }}
           animate={{
-            opacity: [0, 1, 0],
-            scale: [0, 1, 0],
-            y: -100,
+            opacity: [0, 0.8, 0],
+            scale: [0, 1.5, 0],
+            y: -150,
             x: Math.random() * 200 - 100
           }}
           transition={{
-            duration: 2 + Math.random() * 2,
+            duration: 3 + Math.random() * 3,
             repeat: Infinity,
-            delay: Math.random() * 2
+            delay: Math.random() * 3
           }}
           style={{
-            width: Math.random() * 6 + 2,
-            height: Math.random() * 6 + 2,
+            width: Math.random() * 8 + 2,
+            height: Math.random() * 8 + 2,
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
@@ -42,37 +42,42 @@ const DivineSection = () => {
       ))}
 
       {/* CENTERPIECE + TEXT CONTAINER */}
-      <div className="relative z-10 flex flex-col items-center text-center w-full max-w-4xl px-4">
+      <div className="relative z-10 flex flex-col items-center text-center w-full">
 
         {/* --- THE HOLY CENTERPIECE (Rings + Halo + Image) --- */}
-        <div className="relative flex items-center justify-center mb-10 w-[500px] h-[500px]">
+        {/* Container Size matches the largest ring to avoid layout shift, but content is absolutely centered */}
+        <div className="relative w-[800px] h-[800px] flex items-center justify-center mb-8 max-w-full">
 
-          {/* Ring 1 (Large) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-              className="w-[700px] h-[700px] border-[2px] border-orange-200/60 rounded-full border-dashed"
-            />
-          </div>
-          {/* Ring 2 (Small) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              className="w-[550px] h-[550px] border-[1px] border-yellow-500/40 rounded-full"
-            />
-          </div>
+          {/* Ring 1 (Largest) - Reversed Rotation */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            className="absolute w-[600px] h-[600px] md:w-[750px] md:h-[750px] border-[1px] border-orange-300/40 rounded-full border-dashed"
+          />
+
+          {/* Ring 2 (Medium) - Forward Rotation */}
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="absolute w-[500px] h-[500px] md:w-[600px] md:h-[600px] border-[2px] border-red-300/30 rounded-full border-dotted"
+          />
+
+          {/* Ring 3 (Inner) - Slow Rotation */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute w-[400px] h-[400px] md:w-[480px] md:h-[480px] border-[1px] border-yellow-500/50 rounded-full"
+          />
 
           {/* Glowing Halo Behind Image */}
-          <div className="absolute w-[400px] h-[400px] bg-gradient-to-r from-yellow-300 to-orange-400 rounded-full blur-[100px] opacity-40 animate-pulse" />
+          <div className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] bg-gradient-to-r from-amber-200 to-orange-300 rounded-full blur-[80px] opacity-60 animate-pulse" />
 
-          {/* The Image Itself */}
+          {/* The Image Itself - Centered */}
           <motion.div
             initial={{ scale: 0, rotate: -180, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
-            transition={{ duration: 1.5, type: "spring", bounce: 0.4 }}
-            className="relative w-80 h-80 md:w-96 md:h-96 rounded-full border-[6px] border-yellow-500 shadow-[0_0_50px_rgba(255,165,0,0.6)] overflow-hidden bg-white z-20"
+            transition={{ duration: 1.2, type: "spring", bounce: 0.5 }}
+            className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-[8px] border-yellow-500 shadow-[0_0_60px_rgba(255,165,0,0.8)] overflow-hidden bg-white z-20"
           >
             <Image
               src="/Image/ganpati.jpg"
@@ -88,24 +93,24 @@ const DivineSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="mt-4"
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="relative z-30 -mt-20" // Negative margin to pull text closer to the rings bottom
         >
           <div className="text-5xl text-orange-600 mb-2 animate-bounce drop-shadow-md flex justify-center">
             <FaOm />
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-700 via-red-600 to-yellow-600 mb-4 font-hindi leading-tight">
+          <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-700 via-red-600 to-amber-600 mb-4 font-hindi leading-tight drop-shadow-sm">
             || श्री गणेशाय नमः ||
           </h1>
-          <p className="text-xl text-orange-800 font-bold max-w-xl mx-auto leading-relaxed font-hindi drop-shadow-sm bg-white/40 backdrop-blur-sm p-4 rounded-xl border border-white/50">
+          <p className="text-xl md:text-2xl text-orange-900 font-bold max-w-2xl mx-auto leading-relaxed font-hindi drop-shadow-sm px-4">
             "वक्रतुंड महाकाय सूर्यकोटि समप्रभ। <br />
             निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"
           </p>
 
-          <div className="mt-6 flex items-center justify-center gap-3 opacity-80">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-orange-400" />
-            <span className="text-red-600 font-bold uppercase tracking-widest text-xs">Shubh Aarambh</span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-orange-400" />
+          <div className="mt-8 flex items-center justify-center gap-3 opacity-90">
+            <div className="h-0.5 w-24 bg-gradient-to-r from-transparent to-orange-500" />
+            <span className="text-red-700 font-bold uppercase tracking-widest text-sm">Shubh Aarambh</span>
+            <div className="h-0.5 w-24 bg-gradient-to-l from-transparent to-orange-500" />
           </div>
         </motion.div>
       </div>
