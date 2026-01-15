@@ -143,11 +143,11 @@ export default function HomePage() {
                   <p className="text-lg font-bold text-white">+91 9758751630</p>
                   <p className="text-xs text-gray-500 mt-1 leading-relaxed">Bulandshahar Stand, Siyana, Bulandshahr</p>
                 </div>
-              <span>
-                <Link href="/contact" className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                  <FaPhoneAlt color="white" /> 
-                </Link>
-                <span className="text-white">Call</span>
+                <span>
+                  <Link href="/contact" className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                    <FaPhoneAlt color="white" />
+                  </Link>
+                  <span className="text-white">Call</span>
                 </span>
 
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-red-600/20 rounded-full blur-2xl" />

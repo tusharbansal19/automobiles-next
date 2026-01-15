@@ -33,10 +33,10 @@ const NAV_MENU = {
     { label: "Best Sellers", href: "/cars?sort=best_selling" },
   ],
   "GALLERY": [
-    { label: "Shop Floor", href: "/gallery/shop" },
-    { label: "Before & After", href: "/gallery/transformations" },
-    { label: "Team & Events", href: "/gallery/team" },
-    { label: "Customer Stories", href: "/gallery/reviews" },
+    { label: "Shop Floor", href: "/gallery?filter=workshop" },
+    { label: "Before & After", href: "/gallery?filter=transformations" },
+    { label: "Team & Events", href: "/gallery?filter=team" },
+    { label: "Customer Stories", href: "/gallery?filter=customers" },
   ],
   "PERFORMANCE": [
     { label: "Performance Tuning", href: "/performance" },
