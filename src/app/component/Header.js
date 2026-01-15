@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { FaCar, FaBars, FaTimes, FaSearch, FaUser, FaHeart, FaMapMarkerAlt, FaChevronDown, FaMobileAlt, FaTools, FaChartBar, FaBoxes, FaCog, FaHome, FaEnvelope } from 'react-icons/fa';
+import { FaCar, FaBars, FaTimes, FaSearch, FaUser, FaHeart, FaMapMarkerAlt, FaChevronDown, FaMobileAlt, FaTools, FaChartBar, FaBoxes, FaCog, FaHome, FaEnvelope, FaPhone } from 'react-icons/fa';
 import { AiOutlineHome, AiOutlineCar } from 'react-icons/ai';
 
 // Navigation Data
@@ -27,15 +27,29 @@ const NAV_MENU = {
     { label: "Insurance Claims", href: "/services#insurance" },
     { label: "Roadside Assistance", href: "/contact#emergency", highlight: true },
   ],
+  "CARS": [
+    { label: "All Cars", href: "/cars" },
+    { label: "New Arrivals", href: "/cars?sort=newest" },
+    { label: "Best Sellers", href: "/cars?sort=best_selling" },
+  ],
   "GALLERY": [
     { label: "Shop Floor", href: "/gallery/shop" },
     { label: "Before & After", href: "/gallery/transformations" },
     { label: "Team & Events", href: "/gallery/team" },
     { label: "Customer Stories", href: "/gallery/reviews" },
   ],
+  "PERFORMANCE": [
+    { label: "Performance Tuning", href: "/performance" },
+    { label: "Upgrades", href: "/performance#upgrades" },
+  ],
   "ABOUT US": [
     { label: "Our Story", href: "/about" },
     { label: "Why Choose Us", href: "/about#why-us" },
+  ],
+  "CONTACT US": [
+    { label: "Get In Touch", href: "/contact" },
+    { label: "Locate Us", href: "/contact#map" },
+    { label: "Support", href: "/contact#support" },
   ]
 };
 
@@ -87,13 +101,7 @@ export default function Header() {
 
             {/* Search Bar (Hidden on Mobile) */}
             <div className="hidden md:flex flex-1 max-w-xl mx-8 relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <select className="bg-transparent text-sm text-gray-500 font-medium focus:outline-none border-r border-gray-200 pr-2 cursor-pointer">
-                  <option>All</option>
-                  <option>New</option>
-                  <option>Used</option>
-                </select>
-              </div>
+
               <input
                 type="text"
                 placeholder="Search  or Ask a Question..."
@@ -106,9 +114,23 @@ export default function Header() {
 
             {/* Right Actions */}
             <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700">
-              <div className="flex items-center gap-1 cursor-pointer hover:text-red-600">
-                <span>English</span>
-                <FaChevronDown size={10} />
+              <div className="relative group h-full flex items-center">
+                <div className="flex items-center gap-1 cursor-pointer hover:text-red-600 py-2">
+                  <span>Call Us</span>
+                  <FaChevronDown size={10} className="group-hover:rotate-180 transition-transform duration-200" />
+                </div>
+
+                {/* Phone Dropdown */}
+                <div className="absolute top-full right-0 w-48 bg-white border border-gray-100 shadow-xl rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 transform translate-y-2 group-hover:translate-y-0">
+                  <div className="flex flex-col">
+                    <a href="tel:9719167530" className="px-4 py-3 text-sm text-gray-700 hover:text-red-600 hover:bg-gray-50 transition-colors font-bold flex items-center gap-2">
+                      <FaMobileAlt className="text-gray-400" /> +91 97191 67530
+                    </a>
+                    <a href="tel:9758751630" className="px-4 py-3 text-sm text-gray-700 hover:text-red-600 hover:bg-gray-50 transition-colors font-bold flex items-center gap-2">
+                      <FaPhone className="text-gray-400" /> +91 97587 51630
+                    </a>
+                  </div>
+                </div>
               </div>
               <button className="flex items-center gap-1 hover:text-red-600 transition-colors">
                 <FaHeart size={18} />

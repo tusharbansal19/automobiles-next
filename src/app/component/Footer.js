@@ -11,10 +11,7 @@ export default function Footer() {
           {/* About Section */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center shadow-md">
-                <FaCar size={20} className="text-white" />
-              </div>
-              <h2 className="text-xl font-bold tracking-tight text-slate-800">Tushar<span className="text-blue-600">Auto</span></h2>
+              <img src="/Image/logo.png" alt="Tushar Automobiles" className="h-12 w-auto object-contain" />
             </div>
             <p className="text-slate-500 text-sm leading-relaxed mb-6">
               Your trusted partner for premium automobile parts and expert car services. We ensure your vehicle performs at its best with our quality solutions.

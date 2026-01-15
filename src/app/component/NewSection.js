@@ -120,7 +120,7 @@ export default function ServiceSection() {
           className="w-full md:w-1/2 h-80 rounded-xl overflow-hidden shadow-xl relative group"
         >
           <img
-            src="https://png.pngtree.com/png-vector/20221113/ourlarge/pngtree-auto-repair-logo-png-image_6443119.png"
+            src="/Image/logo.png"
             alt="Service"
             className="w-full h-full object-contain p-8 bg-slate-50 transition-transform duration-700 group-hover:scale-105"
           />

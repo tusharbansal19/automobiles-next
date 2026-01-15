@@ -23,7 +23,7 @@ export const metadata = {
   description: "Tushar Automobiles offers best price automobile spare parts, car services, and automotive solutions. Family-run business with 30+ years of experience in quality auto parts and reliable service.",
   keywords: [
     "automobile parts",
-    "car spare parts", 
+    "car spare parts",
     "auto services",
     "automotive repair",
     "car maintenance",
@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
     "name": "Tushar Automobiles",
     "description": "Premium automobile spare parts, car services, and automotive solutions with 30+ years of experience.",
     "url": "https://tusharautomobiles.me",
-    "logo": "https://tusharautomobiles.me/Image/shopImg.jpg",
+    "logo": "https://tusharautomobiles.me/Image/logo.png",
     "image": "https://tusharautomobiles.me/Image/shopImg.jpg",
     "telephone": "+91-123-456-7890",
     "email": "info@tusharautomobiles.me",
@@ -142,7 +142,7 @@ export default function RootLayout({ children }) {
         "jobTitle": "Manager"
       },
       {
-        "@type": "Person", 
+        "@type": "Person",
         "name": "Dev Bansal",
         "jobTitle": "Service Head"
       }
@@ -169,7 +169,7 @@ export default function RootLayout({ children }) {
           }
         },
         {
-          "@type": "Offer", 
+          "@type": "Offer",
           "itemOffered": {
             "@type": "Product",
             "name": "Auto Spare Parts",
@@ -209,11 +209,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <Header/>
+          <Header />
           <PageWrapper>
             {children}
           </PageWrapper>
-          <Footer/>
+          <Footer />
         </Providers>
       </body>
     </html>
