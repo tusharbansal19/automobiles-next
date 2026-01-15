@@ -86,8 +86,7 @@ export default function LoginPage() {
 
                     {/* Logo - Visible on all screens */}
                     <div className="text-center mb-10">
-                        {/* Added invert to make white logo black on white bg */}
-                        <img src="/Image/logo.png" alt="Logo" className="h-24 w-auto mx-auto mb-4 invert" />
+                       
                         <h2 className="text-2xl font-black text-gray-900">Tushar Automobiles</h2>
                     </div>
 
