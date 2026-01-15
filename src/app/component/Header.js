@@ -8,33 +8,37 @@ import { AiOutlineHome, AiOutlineCar } from 'react-icons/ai';
 
 // Navigation Data
 const NAV_MENU = {
-  "NEW CARS": [
-    { label: "Explore New Cars", href: "/cars/new" },
-    { label: "Electric Cars", href: "/cars/electric" },
-    { label: "Popular Cars", href: "/cars/popular" },
-    { label: "Upcoming Cars", href: "/cars/upcoming" },
-    { label: "New Launches", href: "/cars/launches" },
-    { label: "Car Insurance", href: "/insurance", highlight: true },
-    { label: "Popular Brands", href: "/brands" },
-    { label: "Compare Cars", href: "/compare" },
-    { label: "Find Car Dealers", href: "/dealers" },
+  "SPARE PARTS": [
+    { label: "Engine Components", href: "/services?category=engine" },
+    { label: "Brake Systems", href: "/services?category=brakes" },
+    { label: "Suspension & Steering", href: "/services?category=suspension" },
+    { label: "Electrical & Lights", href: "/services?category=electrical" },
+    { label: "Body Parts", href: "/services?category=body" },
+    { label: "Oils & Fluids", href: "/services?category=oils", highlight: true },
+    { label: "Batteries", href: "/services?category=batteries" },
+    { label: "Tyres & Rims", href: "/services?category=tyres" },
   ],
-  "USED CARS": [
-    { label: "Buy Used Cars", href: "/cars/used" },
-    { label: "Sell My Car", href: "/sell" },
-    { label: "Car Valuation", href: "/valuation" },
-    { label: "Used Car Dealers", href: "/used-dealers" },
+  "OUR SERVICES": [
+    { label: "Periodic Maintenance", href: "/services#maintenance" },
+    { label: "Denting & Painting", href: "/services#denting" },
+    { label: "AC Service & Repair", href: "/services#ac" },
+    { label: "Wheel Alignment", href: "/services#wheels" },
+    { label: "Car Spa & Detailing", href: "/services#cleaning" },
+    { label: "Insurance Claims", href: "/services#insurance" },
+    { label: "Roadside Assistance", href: "/contact#emergency", highlight: true },
   ],
-  "NEWS & REVIEWS": [
-    { label: "Car News", href: "/news" },
-    { label: "Car Reviews", href: "/reviews" },
-    { label: "Video Reviews", href: "/videos" },
+  "GALLERY": [
+    { label: "Shop Floor", href: "/gallery/shop" },
+    { label: "Before & After", href: "/gallery/transformations" },
+    { label: "Team & Events", href: "/gallery/team" },
+    { label: "Customer Stories", href: "/gallery/reviews" },
   ],
-  "VIDEOS": [
-    { label: "New Tech", href: "/videos/tech" },
-    { label: "Test Drives", href: "/videos/test-drives" },
+  "ABOUT US": [
+    { label: "Our Story", href: "/about" },
+    { label: "Why Choose Us", href: "/about#why-us" },
   ]
 };
+
 
 export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -146,9 +150,6 @@ export default function Header() {
                   <div className={`absolute bottom-0 h-0.5 bg-red-600 transition-all duration-300 ${activeDropdown === menu ? 'w-full opacity-100' : 'w-0 opacity-0'} left-0`} style={{ width: activeDropdown === menu ? '100px' : '0' }} /> {/* Note: Width is tricky with absolute, relying on group hover for border-bottom on button might be better, but we stick to the plan */}
                 </div>
               ))}
-              <Link href="/services" className="h-full px-4 flex items-center gap-1 text-xs font-bold text-gray-800 hover:text-red-600 tracking-wide">
-                SERVICES
-              </Link>
               {isAdminSection && (
                 <Link href="/admin" className="h-full px-4 flex items-center gap-1 text-xs font-bold text-red-600 tracking-wide">
                   ADMIN
@@ -164,6 +165,7 @@ export default function Header() {
             </button>
           </div>
 
+          {/* MEGA MENU DROPDOWN */}
           {/* MEGA MENU DROPDOWN */}
           {activeDropdown && NAV_MENU[activeDropdown] && (
             <div
@@ -185,26 +187,40 @@ export default function Header() {
                           >
                             <span>{item.label}</span>
                             <span className="opacity-0 group-hover:opacity-100 transition-opacity text-red-600 text-xs">→</span>
-                            {item.highlight && <span className="ml-2 text-[10px] bg-yellow-100 text-yellow-700 px-1 rounded">AD</span>}
+                            {item.highlight && <span className="ml-2 text-[10px] bg-yellow-100 text-yellow-700 px-1 rounded">HOT</span>}
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* Featured Column (Mock Content based on menu) */}
+                  {/* Featured Column */}
                   <div className="w-3/4 pl-8">
-                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Trending in {activeDropdown}</h3>
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+                      {activeDropdown === "SPARE PARTS" ? "Best Selling Parts" : activeDropdown === "OUR SERVICES" ? "Popular Packages" : "Highlights"}
+                    </h3>
                     <div className="grid grid-cols-3 gap-6">
-                      {/* Dummy trending items */}
-                      {[1, 2, 3].map((i) => (
+                      {/* Dynamic Content based on Dropdown */}
+                      {(activeDropdown === "SPARE PARTS" ? [
+                        { title: "Synthetic Engine Oil", price: "$45", img: "https://pngimg.com/uploads/motor_oil/motor_oil_PNG36.png" },
+                        { title: "Ceramic Brake Pads", price: "$80", img: "https://pngimg.com/uploads/disc_brake/disc_brake_PNG33.png", tag: "Best Seller" },
+                        { title: "High Performance Tires", price: "$120", img: "https://pngimg.com/uploads/tires/tires_PNG31.png" }
+                      ] : activeDropdown === "OUR SERVICES" ? [
+                        { title: "Full System Audit", price: "Free", img: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=300" },
+                        { title: "AC Disinfection", price: "$30", img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=300", tag: "Summer Special" },
+                        { title: "Paint Protection", price: "$200", img: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=300" }
+                      ] : [
+                        { title: "Advanced Workshop", img: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&q=80&w=300" },
+                        { title: "Happy Customers", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&q=80&w=300" },
+                        { title: "Expert Team", img: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=300" }
+                      ]).map((item, i) => (
                         <div key={i} className="group cursor-pointer">
-                          <div className="bg-gray-100 rounded-lg h-32 mb-3 overflow-hidden relative">
-                            <img src={`https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&q=80&w=300&ixlib=rb-4.0.3`} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                            {i === 1 && <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>}
+                          <div className="bg-gray-100 rounded-xl h-32 mb-3 overflow-hidden relative border border-gray-100">
+                            <img src={item.img} className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform mix-blend-multiply" />
+                            {item.tag && <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">{item.tag}</span>}
                           </div>
-                          <h4 className="font-bold text-gray-900 group-hover:text-red-600 transition-colors">2026 Sports Model {i}</h4>
-                          <p className="text-xs text-gray-500">Starts at $45,000</p>
+                          <h4 className="font-bold text-gray-900 group-hover:text-red-600 transition-colors text-sm">{item.title}</h4>
+                          {item.price && <p className="text-xs text-gray-500">From {item.price}</p>}
                         </div>
                       ))}
                     </div>

@@ -126,7 +126,6 @@ export default function HomePage() {
                   </Link>
                 </div>
               </div>
-              <img src="/Image/carHome.jpg" alt="Hero Car" className="absolute bottom-[-10%] right-[-10%] w-[60%] object-contain opacity-20 md:opacity-100 mix-blend-multiply z-0 pointer-events-none" />
             </motion.div>
 
             {/* Right Column: 2 Small Cards */}
@@ -139,10 +138,18 @@ export default function HomePage() {
                 className="flex-1 bg-gray-900 text-white rounded-xl p-8 flex flex-col justify-center relative overflow-hidden shadow-sm"
               >
                 <h3 className="text-2xl font-bold mb-2">Emergency?</h3>
-                <p className="text-gray-400 mb-6 text-sm">24/7 Roadside Assistance available.</p>
+                <p className="text-gray-400 mb-2 text-sm">24/7 Roadside Assistance available.</p>
+                <div className="mb-6">
+                  <p className="text-lg font-bold text-white">+91 9758751630</p>
+                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">Bulandshahar Stand, Siyana, Bulandshahr</p>
+                </div>
+              <span>
                 <Link href="/contact" className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                  <FaPhoneAlt color="white" />
+                  <FaPhoneAlt color="white" /> 
                 </Link>
+                <span className="text-white">Call</span>
+                </span>
+
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-red-600/20 rounded-full blur-2xl" />
               </motion.div>
 
@@ -153,11 +160,14 @@ export default function HomePage() {
                 transition={{ delay: 0.4 }}
                 className="flex-1 bg-red-50 rounded-xl p-8 flex flex-col justify-center items-start text-left relative overflow-hidden shadow-sm border border-red-100"
               >
-                <div className="bg-white p-3 rounded-xl mb-4 shadow-sm text-red-600">
-                  <FaStar size={24} />
+                <div className="relative z-10">
+                  <div className="bg-white p-3 rounded-xl mb-4 shadow-sm text-red-600 w-fit">
+                    <FaStar size={24} />
+                  </div>
+                  <h3 className="text-3xl font-bold text-gray-900">4.9/5</h3>
+                  <p className="text-gray-500 text-sm font-medium">Customer Satisfaction Rating</p>
                 </div>
-                <h3 className="text-3xl font-bold text-gray-900">4.9/5</h3>
-                <p className="text-gray-500 text-sm font-medium">Customer Satisfaction Rating</p>
+                <img src="/Image/carHome.jpg" alt="Satisfaction Car" className="absolute bottom-[-20%] right-[-20%] w-[80%] object-contain opacity-10 mix-blend-multiply pointer-events-none" />
               </motion.div>
             </div>
           </div>
