@@ -109,11 +109,7 @@ export const metadata = {
     ],
   },
   manifest: "/manifest.json",
-  icons: {
-    icon: '/Image/favicon.png',
-    apple: '/Image/favicon.png',
-    shortcut: '/Image/favicon.png',
-  },
+
 };
 
 export default function RootLayout({ children }) {

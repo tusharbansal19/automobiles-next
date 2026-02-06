@@ -3,27 +3,45 @@ export default function sitemap() {
   const nowIso = new Date().toISOString();
 
   const entries = [
-    { 
-      path: "/cars", 
-      changeFrequency: "weekly", 
+    {
+      path: "",
+      changeFrequency: "daily",
       priority: 1.0,
       lastModified: nowIso
     },
-    { 
-      path: "/services", 
-      changeFrequency: "weekly", 
+    {
+      path: "/cars",
+      changeFrequency: "weekly",
       priority: 1.0,
       lastModified: nowIso
     },
-    { 
-      path: "/contact", 
-      changeFrequency: "monthly", 
+    {
+      path: "/services",
+      changeFrequency: "weekly",
+      priority: 1.0,
+      lastModified: nowIso
+    },
+    {
+      path: "/performance",
+      changeFrequency: "weekly",
       priority: 0.8,
       lastModified: nowIso
     },
-    { 
-      path: "/about", 
-      changeFrequency: "monthly", 
+    {
+      path: "/gallery",
+      changeFrequency: "weekly",
+      priority: 0.8,
+      lastModified: nowIso
+    },
+    {
+      path: "/about",
+      changeFrequency: "monthly",
+      priority: 0.8,
+      lastModified: nowIso
+    },
+    {
+      path: "/contact",
+      changeFrequency: "monthly",
       priority: 0.8,
       lastModified: nowIso
     },
@@ -36,5 +54,3 @@ export default function sitemap() {
     priority: entry.priority,
   }));
 }
-
-
