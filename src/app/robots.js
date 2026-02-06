@@ -3,7 +3,7 @@ export default function robots() {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/api/',
+      disallow: ['/api/', '/admin/', '/private/'],
     },
     sitemap: 'https://tusharautomobiles.me/sitemap.xml',
   }
