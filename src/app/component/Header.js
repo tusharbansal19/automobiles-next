@@ -213,11 +213,10 @@ export default function Header() {
             </nav>
 
             {/* Location Selector */}
-            <button className="flex items-center gap-2 text-xs font-semibold text-gray-700 hover:text-black">
-              <FaMapMarkerAlt className="text-gray-400" />
-              <span>Select City</span>
-              <FaChevronDown size={10} />
-            </button>
+            <a href="https://maps.google.com/?q=28.6240976,78.0547344" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-semibold text-gray-700 hover:text-red-600 transition-colors">
+              <FaMapMarkerAlt className="text-red-500" />
+              <span>Siyana, Bulandshahr</span>
+            </a>
           </div>
 
           {/* MEGA MENU DROPDOWN */}

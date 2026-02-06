@@ -23,7 +23,7 @@ export default function Footer() {
               <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md hover:bg-blue-600 transition-all duration-300 group ring-1 ring-slate-200">
                 <FaFacebook className="text-slate-400 group-hover:text-white" size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md hover:bg-pink-600 transition-all duration-300 group ring-1 ring-slate-200">
+              <a href="https://www.instagram.com/tusharautomobile?igsh=MWkyamJwcGNhOGEzMg==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md hover:bg-pink-600 transition-all duration-300 group ring-1 ring-slate-200">
                 <FaInstagram className="text-slate-400 group-hover:text-white" size={18} />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md hover:bg-blue-400 transition-all duration-300 group ring-1 ring-slate-200">
@@ -66,7 +66,9 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <FaMapMarkerAlt className="mt-1 mr-3 text-blue-600 flex-shrink-0" />
-                <span className="text-slate-500 text-sm">Bulandshahr Stand, Siyana, <br />BSR, UP, INDIA</span>
+                <a href="https://maps.google.com/?q=28.6240976,78.0547344" target="_blank" rel="noopener noreferrer" className="text-slate-500 text-sm hover:text-blue-600 transition-colors">
+                  Bulandshahr Stand, Siyana, <br />BSR, UP, INDIA
+                </a>
               </li>
               <li className="flex items-center">
                 <FaPhone className="mr-3 text-blue-600 flex-shrink-0" />

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaInstagram } from "react-icons/fa";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -102,6 +103,20 @@ export default function ContactUs() {
                     Bulandshahr Stand, Siyana, <br /> Bulandshahar, UP
                   </p>
                 </div>
+
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Social Connect</span>
+                  <div className="flex gap-4 mt-2">
+                    <a
+                      href="https://www.instagram.com/tusharautomobile?igsh=MWkyamJwcGNhOGEzMg=="
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all text-sm"
+                    >
+                      <FaInstagram size={18} /> @tusharautomobile
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -183,7 +198,7 @@ export default function ContactUs() {
             </form>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }
