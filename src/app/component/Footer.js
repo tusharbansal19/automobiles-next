@@ -1,6 +1,7 @@
 "use client";
 
 import { FaCar, FaFacebook, FaInstagram, FaTwitter, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -11,7 +12,9 @@ export default function Footer() {
           {/* About Section */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
-              <img src="/Image/logo.png" alt="Tushar Automobiles" className="h-12 w-auto object-contain" />
+              <div className="relative h-12 w-32">
+                <Image src="/Image/logo.png" alt="Tushar Automobiles" fill className="object-contain" />
+              </div>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed mb-6">
               Your trusted partner for premium automobile parts and expert car services. We ensure your vehicle performs at its best with our quality solutions.

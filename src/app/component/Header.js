@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaCar, FaBars, FaTimes, FaSearch, FaUser, FaHeart, FaMapMarkerAlt, FaChevronDown, FaMobileAlt, FaTools, FaChartBar, FaBoxes, FaCog, FaHome, FaEnvelope, FaPhone, FaSignOutAlt } from 'react-icons/fa';
 import { AiOutlineHome, AiOutlineCar } from 'react-icons/ai';
@@ -63,7 +64,7 @@ export default function Header() {
   const headerRef = useRef(null);
   const router = useRouter();
   const pathname = usePathname();
-  
+
   // Redux Auth
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
@@ -107,7 +108,9 @@ export default function Header() {
 
             {/* Logo */}
             <div className="flex items-center gap-2 cursor-pointer flex-shrink-0" onClick={() => router.push('/')}>
-              <img src="/Image/logo.png" alt="TusharAuto Logo" className="h-14 w-auto object-contain" />
+              <div className="relative h-14 w-40">
+                <Image src="/Image/logo.png" alt="TusharAuto Logo" fill className="object-contain" priority />
+              </div>
             </div>
 
             {/* Search Bar (Hidden on Mobile) */}
@@ -146,28 +149,28 @@ export default function Header() {
               <button className="flex items-center gap-1 hover:text-red-600 transition-colors">
                 <FaHeart size={18} />
               </button>
-              
+
               {isAuthenticated && user ? (
-                 <div className="relative group/auth h-full flex items-center">
-                    <button className="flex items-center gap-2 hover:text-red-600 transition-colors font-bold">
-                        <FaUser size={18} />
-                        <span>Hi, {user.name.split(' ')[0]}</span>
-                    </button>
-                    {/* User Dropdown */}
-                    <div className="absolute top-full right-0 w-40 bg-white border border-gray-100 shadow-xl rounded-lg py-2 opacity-0 invisible group-hover/auth:opacity-100 group-hover/auth:visible transition-all duration-200 z-50 transform translate-y-2 group-hover/auth:translate-y-0">
-                         <button 
-                            onClick={handleLogout}
-                            className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-red-600 hover:bg-gray-50 flex items-center gap-2"
-                         >
-                            <FaSignOutAlt /> Logout
-                         </button>
-                    </div>
-                 </div>
-              ) : (
-                  <Link href="/login" className="flex items-center gap-2 hover:text-red-600 transition-colors">
+                <div className="relative group/auth h-full flex items-center">
+                  <button className="flex items-center gap-2 hover:text-red-600 transition-colors font-bold">
                     <FaUser size={18} />
-                    <span>Login / Register</span>
-                  </Link>
+                    <span>Hi, {user.name.split(' ')[0]}</span>
+                  </button>
+                  {/* User Dropdown */}
+                  <div className="absolute top-full right-0 w-40 bg-white border border-gray-100 shadow-xl rounded-lg py-2 opacity-0 invisible group-hover/auth:opacity-100 group-hover/auth:visible transition-all duration-200 z-50 transform translate-y-2 group-hover/auth:translate-y-0">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-red-600 hover:bg-gray-50 flex items-center gap-2"
+                    >
+                      <FaSignOutAlt /> Logout
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <Link href="/login" className="flex items-center gap-2 hover:text-red-600 transition-colors">
+                  <FaUser size={18} />
+                  <span>Login / Register</span>
+                </Link>
               )}
             </div>
 
@@ -295,7 +298,9 @@ export default function Header() {
             {/* Header */}
             <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-gray-50">
               <div className="flex items-center gap-2">
-                <img src="/Image/logo.png" alt="TusharAuto Logo" className="h-10 w-auto object-contain" />
+                <div className="relative h-10 w-32">
+                  <Image src="/Image/logo.png" alt="TusharAuto Logo" fill className="object-contain" />
+                </div>
               </div>
               <button onClick={() => setMenuOpen(false)} className="text-gray-500 hover:text-red-600">
                 <FaTimes size={20} />
@@ -342,21 +347,21 @@ export default function Header() {
             {/* Footer Actions */}
             <div className="p-4 border-t border-gray-100 bg-gray-50">
               {isAuthenticated && user ? (
-                 <div className="mb-3 space-y-2">
-                    <div className="text-center font-bold text-gray-900 pb-2">Hi, {user.name}</div>
-                    <button 
-                        onClick={handleLogout}
-                        className="w-full py-3 bg-red-100 text-red-600 font-bold rounded-lg shadow-sm flex items-center justify-center gap-2"
-                    >
-                        <FaSignOutAlt /> Logout
-                    </button>
-                 </div>
+                <div className="mb-3 space-y-2">
+                  <div className="text-center font-bold text-gray-900 pb-2">Hi, {user.name}</div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full py-3 bg-red-100 text-red-600 font-bold rounded-lg shadow-sm flex items-center justify-center gap-2"
+                  >
+                    <FaSignOutAlt /> Logout
+                  </button>
+                </div>
               ) : (
-                  <Link href="/login" onClick={() => setMenuOpen(false)} className="block w-full py-3 bg-red-600 text-white font-bold rounded-lg mb-3 shadow-md text-center">
-                    Login / Register
-                  </Link>
+                <Link href="/login" onClick={() => setMenuOpen(false)} className="block w-full py-3 bg-red-600 text-white font-bold rounded-lg mb-3 shadow-md text-center">
+                  Login / Register
+                </Link>
               )}
-              
+
               <div className="flex justify-center gap-6 text-gray-500">
                 <FaHeart size={20} />
                 <div className="flex items-center gap-1">

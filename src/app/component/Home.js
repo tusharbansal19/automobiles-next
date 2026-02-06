@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { FaCar, FaTools, FaShieldAlt, FaStar, FaMapMarkerAlt, FaPhoneAlt, FaQuoteLeft, FaCheckCircle, FaChevronRight, FaChevronLeft, FaThumbsUp, FaShare, FaReply, FaSearch, FaUser, FaCrown } from "react-icons/fa";
 import Link from 'next/link';
+import Image from "next/image";
 import ServiceSection from "./NewSection";
 import MovingCards from "./MovinfCrad";
 import { useState } from "react";
@@ -167,7 +168,13 @@ export default function HomePage() {
                   <h3 className="text-3xl font-bold text-gray-900">4.9/5</h3>
                   <p className="text-gray-500 text-sm font-medium">Customer Satisfaction Rating</p>
                 </div>
-                <img src="/Image/carHome.jpg" alt="Satisfaction Car" className="absolute bottom-[-20%] right-[-20%] w-[80%] object-contain opacity-10 mix-blend-multiply pointer-events-none" />
+                <Image
+                  src="/Image/carHome.jpg"
+                  alt="Satisfaction Car"
+                  width={500}
+                  height={300}
+                  className="absolute bottom-[-20%] right-[-20%] w-[80%] object-contain opacity-10 mix-blend-multiply pointer-events-none"
+                />
               </motion.div>
             </div>
           </div>
@@ -215,11 +222,12 @@ export default function HomePage() {
                 { name: "Skoda", url: "https://upload.wikimedia.org/wikipedia/commons/a/ac/Skoda_Auto_logo_%282011%29.svg" }
               ].map((brand, idx) => (
                 <div key={idx} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col items-center justify-center border border-gray-100 h-32">
-                  <img
+                  <Image
                     src={brand.url}
                     alt={brand.name}
+                    width={100}
+                    height={50}
                     className="h-12 w-auto max-w-full object-contain mb-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }}
                   />
                   <span className="hidden text-xs font-bold text-gray-400 uppercase tracking-widest">{brand.name[0]}</span>
                   <span className="text-xs font-semibold text-gray-900 mt-2">{brand.name}</span>
@@ -238,7 +246,14 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1 relative">
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-red-100 rounded-full z-0" />
-            <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=800" alt="About Workshop" className="rounded-3xl shadow-2xl relative z-10 w-full object-cover h-[500px]" />
+            <div className="relative h-[500px] w-full">
+              <Image
+                src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=800"
+                alt="About Workshop"
+                fill
+                className="rounded-3xl shadow-2xl relative z-10 object-cover"
+              />
+            </div>
             <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-gray-100 rounded-3xl -z-10 hidden md:block" />
             <div className="absolute bottom-8 right-8 bg-white p-6 rounded-2xl shadow-xl z-20 max-w-xs">
               <p className="text-4xl font-black text-red-600 mb-1">30+</p>
